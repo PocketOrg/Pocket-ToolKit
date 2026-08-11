@@ -20,8 +20,8 @@ Clone the repository and link it globally. There are no dependencies, so this is
 immediate:
 
 ```bash
-git clone https://github.com/PocketOrg/pocket-toolkit.git
-cd pocket-toolkit
+git clone https://github.com/PocketOrg/Pocket-ToolKit.git
+cd Pocket-ToolKit
 npm install -g .
 ```
 
