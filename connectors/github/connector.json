@@ -1,0 +1,207 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "github",
+  "summary": "Read and write GitHub issues, pull requests, code and CI runs. Use for triage, review and release work.",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "repo",
+    "read:org"
+  ],
+  "tools": [
+    {
+      "name": "search_repositories",
+      "description": "Searches repositories by name, topic or owner.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "GitHub search syntax."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_file_contents",
+      "description": "Reads a file or lists a directory at a given ref.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Repository owner."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "path": {
+            "type": "string",
+            "description": "Path within the repository."
+          },
+          "ref": {
+            "type": "string",
+            "description": "Branch, tag or commit SHA. Defaults to the default branch."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "path"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_issue",
+      "description": "Opens an issue with a title, body and optional labels and assignees.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Repository owner."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "title": {
+            "type": "string",
+            "description": "Issue title."
+          },
+          "body": {
+            "type": "string",
+            "description": "Markdown body."
+          },
+          "labels": {
+            "type": "array",
+            "description": "Label names to apply."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "title"
+        ]
+      }
+    },
+    {
+      "name": "create_pull_request",
+      "description": "Opens a pull request between two branches.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Repository owner."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "title": {
+            "type": "string",
+            "description": "Pull request title."
+          },
+          "head": {
+            "type": "string",
+            "description": "Branch containing the changes."
+          },
+          "base": {
+            "type": "string",
+            "description": "Branch to merge into."
+          },
+          "body": {
+            "type": "string",
+            "description": "Markdown description."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "title",
+          "head",
+          "base"
+        ]
+      }
+    },
+    {
+      "name": "list_pull_requests",
+      "description": "Lists pull requests, filtered by state.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Repository owner."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "state": {
+            "type": "string",
+            "description": "open, closed or all. Defaults to open."
+          }
+        },
+        "required": [
+          "owner",
+          "repo"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_pull_request_review",
+      "description": "Submits a review with comments, approving or requesting changes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Repository owner."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "pull_number": {
+            "type": "number",
+            "description": "Pull request number."
+          },
+          "event": {
+            "type": "string",
+            "description": "APPROVE, REQUEST_CHANGES or COMMENT."
+          },
+          "body": {
+            "type": "string",
+            "description": "Overall review comment."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "pull_number",
+          "event"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com"
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "docker",
+  "summary": "Inspect and control Docker containers, images and logs. Use when debugging a container or checking what is running.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "docker-mcp"
+    ]
+  },
+  "auth": "none",
+  "scopes": [],
+  "tools": [
+    {
+      "name": "list_containers",
+      "description": "Lists containers with status and ports.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "all": {
+            "type": "boolean",
+            "description": "Include stopped containers."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_logs",
+      "description": "Returns recent log output for a container.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "container": {
+            "type": "string",
+            "description": "Container name or id."
+          },
+          "tail": {
+            "type": "number",
+            "description": "Number of lines. Defaults to 100."
+          }
+        },
+        "required": [
+          "container"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "restart_container",
+      "description": "Restarts a container.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "container": {
+            "type": "string",
+            "description": "Container name or id."
+          }
+        },
+        "required": [
+          "container"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.docker.com"
+}
