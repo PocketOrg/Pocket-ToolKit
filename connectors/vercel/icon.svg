@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-labelledby="vercel-icon-title">
+  <title id="vercel-icon-title">Vercel</title>
+  <style>
+    .vercel-mark { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      .vercel-mark { fill: #FFFFFF; }
+    }
+  </style>
+  <path class="vercel-mark" d="m12 1.608 12 20.784H0Z"/>
+</svg>

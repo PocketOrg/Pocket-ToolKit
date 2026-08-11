@@ -1,0 +1,55 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "vercel",
+  "summary": "Inspect Vercel deployments, build logs and environment variables. Use when a deploy fails or a preview needs checking.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@vercel/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_deployments",
+      "description": "Lists recent deployments with status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "Project name or id."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_deployment_logs",
+      "description": "Returns build and runtime logs for a deployment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deployment_id": {
+            "type": "string",
+            "description": "Deployment id."
+          }
+        },
+        "required": [
+          "deployment_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://vercel.com"
+}
