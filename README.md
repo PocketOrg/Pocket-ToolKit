@@ -12,7 +12,8 @@ Zero dependencies — nothing to install but this repository itself.
 | **`src/`** | audit engine, scaffolders, catalogue generator |
 | **`schema/`** | JSON Schema for `pocket.json` and `connector.json` |
 | **`skills/`** | 28 audited seed skills |
-| **`connectors/`** | 26 seed connectors, each with its official icon |
+| **`connectors/`** | 26 seed connectors, each with its official coloured icon |
+| **`build-icons.mjs`** | refreshes the icon data from Simple Icons |
 
 ## Install
 
@@ -20,8 +21,8 @@ Clone the repository and link it globally. There are no dependencies, so this is
 immediate:
 
 ```bash
-git clone https://github.com/PocketOrg/Pocket-ToolKit.git
-cd Pocket-ToolKit
+git clone https://github.com/PocketOrg/pocket-toolkit.git
+cd pocket-toolkit
 npm install -g .
 ```
 
@@ -225,26 +226,61 @@ github/
 
 ### Connector icons
 
-`icon.svg` is each service's **official brand mark**, taken from
-[Simple Icons](https://simpleicons.org), which publishes brand SVGs under CC0.
-These are the real logos, not approximations, so a connector is recognisable at a
-glance on its marketplace card.
+`icon.svg` is each service's **official brand mark in full brand colour**, from
+[Simple Icons](https://simpleicons.org), which publishes brand SVGs and their
+official hex values under CC0. Real logos in real colours — GitHub's Octocat,
+Slack's plum, Docker's blue — so a connector is recognisable at a glance.
 
-Only the colour is changed. Two properties make one file work in both light and
-dark mode:
+Backgrounds are transparent, so the card's own surface shows through.
 
-1. **`fill="currentColor"`** instead of the fixed brand colour. A hardcoded colour
-   fails on one theme or the other — a dark mark disappears on a dark card, a
-   light one on a light card. Inheriting the text colour means the shape stays
-   authentic while the colour follows the theme.
-2. **Transparent — no background rectangle.** The card's own surface shows
-   through, so the icon sits on whatever tile the UI gives it.
+**The theme problem.** A brand colour chosen for a white page does not necessarily
+survive on a dark one. Measured against a near-black card, several fail outright:
 
-All are 24×24 single-path silhouettes with a `<title>` for screen readers.
+| | Brand hex | On dark |
+| --- | --- | --- |
+| GitHub | `#181717` | 1.0:1 — invisible |
+| Vercel, Notion | `#000000` | 1.1:1 — invisible |
+| AWS | `#232F3E` | 1.4:1 |
 
-When adding a connector, keep those properties. The generator reports any
-connector falling back to the generic plug icon, so a missing mark is visible
-rather than silent.
+So where needed, the SVG carries a `prefers-color-scheme: dark` media query that
+swaps the fill:
+
+```svg
+<style>
+  .github-mark { fill: #181717; }
+  @media (prefers-color-scheme: dark) {
+    .github-mark { fill: #FFFFFF; }
+  }
+</style>
+```
+
+The dark values are the **brands' own dark-surface colours** — GitHub inverts to
+white, AWS uses its orange, Slack its `#E01E5A` — not an algorithmic lightening of
+the light-mode hex, which produces muddy greys that look nothing like the brand.
+Four brands needed the mirror treatment: Supabase's green reads at 2.0:1 on white,
+so light mode uses its deeper shade.
+
+The result: **10 of 26 carry a dark override, 16 use the brand colour in both**, and
+every icon clears **3:1 against white and near-black**.
+
+Two mechanical details worth knowing if you edit one:
+
+- Fill is set through a `<style>` block, **not** a `fill="…"` attribute on the
+  path. A presentation attribute beats the cascade, so the dark override would
+  silently never apply.
+- The stylesheet is embedded rather than external, which means it applies whether
+  the SVG is inlined or loaded via `<img>`/`background-image`. An external
+  stylesheet cannot reach the latter.
+
+To regenerate the icon data from upstream — picking up brand refreshes, or adding
+a connector:
+
+```bash
+node build-icons.mjs
+```
+
+It fails loudly if any icon falls below the contrast floor in either theme, so a
+new connector cannot ship an unreadable mark.
 
 > Trademarks belong to their respective owners. Simple Icons distributes the
 > artwork under CC0; using a logo to identify the service it represents is
