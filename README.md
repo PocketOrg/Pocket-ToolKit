@@ -1,35 +1,51 @@
-# @pocket/create
+# Pocket Toolkit
 
-Scaffold and audit Pocket **Skills** and **Connectors**. Guided setup, like
-`npm init`. Zero dependencies — nothing to download but this package.
+Everything needed to build for [Pocket](https://usepocket.net): the `pocket` CLI,
+the security audit engine, JSON schemas, and the seed catalogues of Skills and
+Connectors.
+
+Zero dependencies — nothing to install but this repository itself.
+
+| | |
+| --- | --- |
+| **`bin/`** | the `pocket` CLI |
+| **`src/`** | audit engine, scaffolders, catalogue generator |
+| **`schema/`** | JSON Schema for `pocket.json` and `connector.json` |
+| **`skills/`** | 28 audited seed skills |
+| **`connectors/`** | 26 seed connectors, each with its official icon |
 
 ## Install
 
-Because there are no dependencies, a global install is immediate:
+Clone the repository and link it globally. There are no dependencies, so this is
+immediate:
 
 ```bash
-cd SkillCreation
+git clone https://github.com/PocketOrg/pocket-toolkit.git
+cd pocket-toolkit
 npm install -g .
 ```
 
-That puts a `pocket` command on your PATH, usable from any directory:
+`npm install -g .` installs from this folder — nothing is fetched from the npm
+registry. It puts a `pocket` command on your PATH, usable from any directory:
 
 ```bash
 pocket init
 ```
 
-To remove it later: `npm uninstall -g @pocket/create`.
+To remove it later, from anywhere:
+
+```bash
+npm uninstall -g @pocket/create
+```
 
 ### Without installing
 
-Run it directly from this folder — no install, no PATH change:
+Run it directly from this folder instead — no install, no PATH change:
 
 ```bash
 node ./bin/pocket.mjs init
+node ./bin/pocket.mjs audit ./my-skill
 ```
-
-Once the package is published, `npx @pocket/create init` will work from
-anywhere too.
 
 > **`pocket: command not found`?** The `pocket` name only exists after
 > `npm install -g .`. Until then use `node ./bin/pocket.mjs`.
@@ -155,17 +171,22 @@ flags above ~5,000.
 
 ## Contributing a skill
 
-1. `npx @pocket/create init skill my-skill`
-2. Write the instructions.
-3. `npx @pocket/create audit my-skill` until it passes.
-4. Open a pull request against [usepocket/skills](https://github.com/usepocket/skills).
+```bash
+pocket init skill my-skill     # scaffold it
+# write the instructions in my-skill/SKILL.md
+pocket audit my-skill          # until it passes
+```
 
-CI runs the same audit. Human review follows.
+Then open a pull request against
+[PocketOrg/skills](https://github.com/PocketOrg/skills). CI runs the same audit;
+human review follows.
 
-## Examples
+## The seed catalogues
 
-The [`skills/`](./skills) directory holds four complete, audited skills — all
-scoring 100/100, useful as a reference for structure and tone:
+### Skills
+
+[`skills/`](./skills) holds **28 audited skills**, every one passing at 100/100.
+Four are hand-written and worth reading as references for structure and tone:
 
 | Skill | Category | Weight |
 | --- | --- | --- |
@@ -174,12 +195,72 @@ scoring 100/100, useful as a reference for structure and tone:
 | `technical-writing` | Documents & Communication | ~750 tokens |
 | `self-improving-agent` | AI & Accelerated Computing | ~1,145 tokens |
 
-`security-review` is worth reading as a demonstration that the audit targets
-*imperative phrasing*, not topic words: it is full of injection and exploit
-terminology and still scores 100/100.
+`security-review` demonstrates that the audit targets *imperative phrasing* rather
+than topic words: it is full of injection and exploit terminology and still scores
+100/100.
 
-Three are adapted from ClawHub with provenance recorded in each `pocket.json`
-(`adaptedFrom`, naming the original and what changed).
+Three are adapted from ClawHub, with provenance recorded in each `pocket.json`
+under `adaptedFrom` — naming the original and what changed.
+
+### Connectors
+
+[`connectors/`](./connectors) holds **26 connectors** for widely-used services —
+GitHub, GitLab, Sentry, Postgres, SQLite, Supabase, Docker, Kubernetes, AWS,
+Cloudflare, Vercel, Slack, Notion, Linear, Jira, Google Drive, Gmail, Google
+Calendar, Figma, Stripe, HubSpot, Snyk, 1Password, plus filesystem, fetch and web
+search.
+
+Each declares real, published MCP packages in its `command`, so a connector is
+installable rather than illustrative.
+
+Every connector directory contains:
+
+```
+github/
+├── connector.json   manifest: transport, auth, scopes, tools
+├── icon.svg         the service's official mark
+├── README.md        what it is and how it is configured
+└── TOOLS.md         per-tool parameters and limits
+```
+
+### Connector icons
+
+`icon.svg` is each service's **official brand mark**, taken from
+[Simple Icons](https://simpleicons.org), which publishes brand SVGs under CC0.
+These are the real logos, not approximations, so a connector is recognisable at a
+glance on its marketplace card.
+
+Only the colour is changed. Two properties make one file work in both light and
+dark mode:
+
+1. **`fill="currentColor"`** instead of the fixed brand colour. A hardcoded colour
+   fails on one theme or the other — a dark mark disappears on a dark card, a
+   light one on a light card. Inheriting the text colour means the shape stays
+   authentic while the colour follows the theme.
+2. **Transparent — no background rectangle.** The card's own surface shows
+   through, so the icon sits on whatever tile the UI gives it.
+
+All are 24×24 single-path silhouettes with a `<title>` for screen readers.
+
+When adding a connector, keep those properties. The generator reports any
+connector falling back to the generic plug icon, so a missing mark is visible
+rather than silent.
+
+> Trademarks belong to their respective owners. Simple Icons distributes the
+> artwork under CC0; using a logo to identify the service it represents is
+> nominative use.
+
+### Regenerating
+
+Both catalogues are generated from definitions in [`src/catalog/`](./src/catalog):
+
+```bash
+node src/catalog/generate.mjs
+```
+
+Every skill is **audited as it is written**, and the run exits non-zero if any
+would fail the gate — so the seed catalogue can never contain something the
+marketplace would reject.
 
 ## Schemas
 
