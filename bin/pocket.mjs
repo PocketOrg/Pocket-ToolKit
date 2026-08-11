@@ -31,9 +31,9 @@ ${c.bold("Commands")}
   audit      Check a skill for structure, safety and context cost
 
 ${c.bold("Examples")}
-  npx @pocket/create init
-  npx @pocket/create init skill pr-conventions
-  npx @pocket/create audit ./pr-conventions
+  pocket init
+  pocket init skill pr-conventions
+  pocket audit ./pr-conventions
 
 ${c.bold("What is the difference?")}
   ${c.cyan("Skill")}      Instructions the agent reads — knowledge. Costs context tokens.
