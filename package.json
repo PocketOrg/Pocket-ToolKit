@@ -1,0 +1,32 @@
+{
+  "name": "@pocket/create",
+  "version": "0.1.0",
+  "description": "Scaffold and audit Pocket Skills and Connectors. Guided setup, like npm init.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "pocket": "./bin/pocket.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "templates",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node ./bin/pocket.mjs",
+    "audit": "node ./bin/pocket.mjs audit",
+    "test": "node ./src/selftest.mjs"
+  },
+  "keywords": [
+    "pocket",
+    "agent-skills",
+    "skill",
+    "mcp",
+    "connector",
+    "ai-agents"
+  ]
+}

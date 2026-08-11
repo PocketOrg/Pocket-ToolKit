@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usepocket.net/schema/skill.json",
+  "title": "Pocket Skill metadata",
+  "description": "Pocket-specific metadata for an Agent Skill, stored as pocket.json alongside SKILL.md. SKILL.md itself follows the open Agent Skills format (agentskills.io) and carries only `name` and `description` in its frontmatter — everything Pocket-specific lives here instead, so the skill stays valid for other runtimes.",
+  "type": "object",
+  "required": ["category", "author", "license"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "This schema's URL. Enables validation and editor autocomplete."
+    },
+    "category": {
+      "description": "Which marketplace filter this skill appears under. One of a fixed set, so a skill cannot invent a category that no filter shows.",
+      "type": "string",
+      "enum": [
+        "AI & Accelerated Computing",
+        "Cloud & DevOps",
+        "Data & Analytics",
+        "Design & Creative",
+        "Documents & Communication",
+        "Healthcare & Science",
+        "Research & Knowledge",
+        "Sales & Marketing",
+        "Security",
+        "Software Engineering",
+        "Tools & Automation"
+      ]
+    },
+    "author": {
+      "description": "The publisher's GitHub handle. Combined with the skill name it forms the skill's unique reference, @author/name — a bare name is NOT unique, since unrelated publishers commonly ship skills with the same one.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
+    },
+    "roles": {
+      "description": "Agent roles this skill suits. Empty or absent means any role. Used to suggest a skill to the right agent rather than to restrict installation.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 60 },
+      "maxItems": 12,
+      "uniqueItems": true,
+      "default": []
+    },
+    "license": {
+      "description": "SPDX identifier, or a short phrase if the licence is not an SPDX one.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "examples": ["MIT", "Apache-2.0", "CC-BY-4.0"]
+    },
+    "homepage": {
+      "description": "Where to read more about this skill.",
+      "type": "string",
+      "format": "uri"
+    },
+    "keywords": {
+      "description": "Extra search terms. The description is already indexed, so use this only for words a reader would search but the description would not naturally contain.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 2, "maxLength": 32 },
+      "maxItems": 16,
+      "uniqueItems": true
+    },
+    "requiresConnectors": {
+      "description": "Connectors this skill assumes are available. A skill teaches an agent HOW to do something; if it also needs the ABILITY, name the connectors here so the marketplace can warn about a skill that cannot act.",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,63}$" },
+      "maxItems": 12,
+      "uniqueItems": true,
+      "default": []
+    },
+    "adaptedFrom": {
+      "description": "Provenance, when this skill is derived from one published elsewhere. Recording it is required by most upstream licences and is shown in the marketplace, so credit is visible rather than implied.",
+      "type": "object",
+      "required": ["registry", "ref"],
+      "additionalProperties": false,
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "The upstream registry, e.g. `clawhub` or `skills-sh`.",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "ref": {
+          "type": "string",
+          "description": "The upstream reference, e.g. `@wpank/code-review`.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the original."
+        },
+        "note": {
+          "type": "string",
+          "description": "What was changed in adapting it. Worth stating plainly — a reader comparing the two should not have to diff them.",
+          "maxLength": 500
+        }
+      }
+    },
+    "deprecated": {
+      "description": "Set when a skill should no longer be installed. The string is shown to anyone who has it installed, so say what to use instead.",
+      "type": "string",
+      "maxLength": 300
+    }
+  }
+}
