@@ -1,0 +1,92 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "linear",
+  "summary": "Manage Linear issues, projects and cycles. Use for sprint planning and issue triage.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@linear/mcp-server"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_issues",
+      "description": "Lists issues filtered by team, state or assignee.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "team_id": {
+            "type": "string",
+            "description": "Team id."
+          },
+          "state": {
+            "type": "string",
+            "description": "Workflow state name."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_issue",
+      "description": "Creates an issue with a title, description and priority.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "team_id": {
+            "type": "string",
+            "description": "Team id."
+          },
+          "title": {
+            "type": "string",
+            "description": "Issue title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Markdown description."
+          },
+          "priority": {
+            "type": "number",
+            "description": "0 none to 4 low."
+          }
+        },
+        "required": [
+          "team_id",
+          "title"
+        ]
+      }
+    },
+    {
+      "name": "update_issue",
+      "description": "Updates an issue's state, assignee or fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "issue_id": {
+            "type": "string",
+            "description": "Issue id."
+          },
+          "state_id": {
+            "type": "string",
+            "description": "New workflow state id."
+          }
+        },
+        "required": [
+          "issue_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://linear.app"
+}

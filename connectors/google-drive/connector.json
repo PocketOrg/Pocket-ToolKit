@@ -1,0 +1,57 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "google-drive",
+  "summary": "Search and read Google Drive files, Docs and Sheets. Use for finding and summarising shared documents.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-gdrive"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "drive.readonly"
+  ],
+  "tools": [
+    {
+      "name": "search_files",
+      "description": "Searches Drive by name and content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_file",
+      "description": "Reads a file's contents, converting Docs and Sheets to text.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "description": "Drive file id."
+          }
+        },
+        "required": [
+          "file_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://drive.google.com"
+}

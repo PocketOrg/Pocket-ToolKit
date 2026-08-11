@@ -1,0 +1,41 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "fetch",
+  "summary": "Fetch a URL and convert the page to readable markdown. Use for reading documentation or an article.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-fetch"
+    ]
+  },
+  "auth": "none",
+  "scopes": [],
+  "tools": [
+    {
+      "name": "fetch",
+      "description": "Fetches a URL and returns its content as markdown.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL to fetch."
+          },
+          "max_length": {
+            "type": "number",
+            "description": "Truncate to this many characters."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT"
+}

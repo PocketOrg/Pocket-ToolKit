@@ -1,0 +1,123 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "gitlab",
+  "summary": "Manage GitLab projects, merge requests, issues and pipelines. Use for teams hosting on GitLab.",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-gitlab"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "api",
+    "read_repository"
+  ],
+  "tools": [
+    {
+      "name": "search_repositories",
+      "description": "Searches projects the token can see.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string",
+            "description": "Search term."
+          }
+        },
+        "required": [
+          "search"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_file_contents",
+      "description": "Reads a file at a given ref.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id or path."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "Path within the project."
+          },
+          "ref": {
+            "type": "string",
+            "description": "Branch, tag or commit."
+          }
+        },
+        "required": [
+          "project_id",
+          "file_path"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_merge_request",
+      "description": "Opens a merge request between two branches.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id or path."
+          },
+          "title": {
+            "type": "string",
+            "description": "Merge request title."
+          },
+          "source_branch": {
+            "type": "string",
+            "description": "Branch with the changes."
+          },
+          "target_branch": {
+            "type": "string",
+            "description": "Branch to merge into."
+          }
+        },
+        "required": [
+          "project_id",
+          "title",
+          "source_branch",
+          "target_branch"
+        ]
+      }
+    },
+    {
+      "name": "create_issue",
+      "description": "Opens an issue on a project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project id or path."
+          },
+          "title": {
+            "type": "string",
+            "description": "Issue title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Markdown description."
+          }
+        },
+        "required": [
+          "project_id",
+          "title"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://gitlab.com"
+}

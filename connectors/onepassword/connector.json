@@ -1,0 +1,57 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "onepassword",
+  "summary": "Read secrets from 1Password vaults by reference, without exposing values in the transcript.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@1password/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "vault.read"
+  ],
+  "tools": [
+    {
+      "name": "list_items",
+      "description": "Lists item titles in a vault. Never returns secret values.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "vault": {
+            "type": "string",
+            "description": "Vault name or id."
+          }
+        },
+        "required": [
+          "vault"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "resolve_reference",
+      "description": "Resolves an op:// secret reference for injection into a process environment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "An op:// URI."
+          }
+        },
+        "required": [
+          "reference"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://1password.com"
+}

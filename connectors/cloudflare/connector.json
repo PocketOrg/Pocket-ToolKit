@@ -1,0 +1,68 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "cloudflare",
+  "summary": "Manage Cloudflare Workers, DNS, KV and analytics. Use when deploying or debugging on Cloudflare.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@cloudflare/mcp-server-cloudflare"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_workers",
+      "description": "Lists Workers in the account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_worker_logs",
+      "description": "Tails recent logs for a Worker.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Worker name."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_dns_records",
+      "description": "Lists DNS records for a zone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "zone": {
+            "type": "string",
+            "description": "Zone name."
+          }
+        },
+        "required": [
+          "zone"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://cloudflare.com"
+}
