@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Security",
+  "author": "pocket",
+  "roles": ["Security Engineer", "Engineer", "Tech Lead"],
+  "license": "MIT",
+  "adaptedFrom": {
+    "registry": "clawhub",
+    "ref": "@jeffallan/security-reviewer",
+    "url": "https://clawhub.ai/jeffallan/skills/security-reviewer",
+    "note": "Rewritten for Pocket: reframed around taint tracing rather than a checklist, added reachability requirement and a reporting template."
+  }
+}

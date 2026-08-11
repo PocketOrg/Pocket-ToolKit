@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "roles": ["Engineer", "Tech Lead", "Engineering Manager"],
+  "license": "MIT",
+  "adaptedFrom": {
+    "registry": "clawhub",
+    "ref": "@wpank/code-review",
+    "url": "https://clawhub.ai/wpank/skills/code-review",
+    "note": "Rewritten for Pocket: restructured into ordered passes, severity table added, model/version frontmatter keys dropped as non-standard."
+  }
+}

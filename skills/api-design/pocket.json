@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "roles": [
+    "Engineer",
+    "Tech Lead",
+    "Architect"
+  ],
+  "license": "MIT"
+}

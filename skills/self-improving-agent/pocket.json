@@ -1,0 +1,14 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "AI & Accelerated Computing",
+  "author": "pocket",
+  "roles": [],
+  "license": "MIT",
+  "keywords": ["learning", "retrospective", "corrections", "memory"],
+  "adaptedFrom": {
+    "registry": "clawhub",
+    "ref": "@pskoett/self-improving-agent",
+    "url": "https://clawhub.ai/pskoett/skills/self-improving-agent",
+    "note": "Substantially rewritten for Pocket. The original is OpenClaw-specific and ~5,300 tokens, built around shell commands that create a .learnings/ directory plus an opt-in hooks system. Pocket loads instructions and never executes scripts, so the mkdir/printf bootstrap and hook mechanism were dropped and the storage location left to the workspace. Reduced to ~950 tokens by cutting the multi-agent compatibility notes and command reference, while keeping the Pattern-Key deduplication idea, the recurrence counter and the read-before-acting discipline, which are the parts that make it work."
+  }
+}
