@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "roles": [
+    "SRE",
+    "Engineer",
+    "Architect"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "roles": [
+    "Product Manager",
+    "Growth Marketer",
+    "Researcher",
+    "Founder"
+  ],
+  "license": "MIT"
+}

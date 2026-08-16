@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "AI & Accelerated Computing",
+  "author": "pocket",
+  "roles": [
+    "AI Engineer",
+    "Engineer",
+    "Architect"
+  ],
+  "license": "MIT"
+}
