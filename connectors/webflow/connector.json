@@ -1,0 +1,97 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "webflow",
+  "summary": "Read and update Webflow sites, collections and CMS items. Use for marketing site content operations.",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "webflow-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_sites",
+      "description": "Lists sites the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_collections",
+      "description": "Lists CMS collections for a site.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "description": "Site identifier."
+          }
+        },
+        "required": [
+          "site_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_items",
+      "description": "Lists items in a collection.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "description": "Collection identifier."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum items."
+          }
+        },
+        "required": [
+          "collection_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_item",
+      "description": "Creates a CMS item as draft or live.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "collection_id": {
+            "type": "string",
+            "description": "Collection identifier."
+          },
+          "fields": {
+            "type": "string",
+            "description": "Field values as JSON."
+          },
+          "live": {
+            "type": "string",
+            "description": "true to publish immediately."
+          }
+        },
+        "required": [
+          "collection_id",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://webflow.com"
+}

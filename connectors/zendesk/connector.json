@@ -1,0 +1,115 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "zendesk",
+  "summary": "Read and update Zendesk tickets and users. Use for support triage and finding recurring customer problems.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "zendesk-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "search_tickets",
+      "description": "Searches tickets by query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Zendesk search query."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum tickets."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_ticket",
+      "description": "Returns a ticket with its comment thread.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "description": "Ticket identifier."
+          }
+        },
+        "required": [
+          "ticket_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "add_comment",
+      "description": "Adds a public or internal comment to a ticket.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "description": "Ticket identifier."
+          },
+          "body": {
+            "type": "string",
+            "description": "Comment text."
+          },
+          "public": {
+            "type": "string",
+            "description": "true for a public reply."
+          }
+        },
+        "required": [
+          "ticket_id",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "update_ticket",
+      "description": "Changes a ticket's status, priority or assignee.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "description": "Ticket identifier."
+          },
+          "status": {
+            "type": "string",
+            "description": "New status."
+          },
+          "priority": {
+            "type": "string",
+            "description": "New priority."
+          },
+          "assignee_id": {
+            "type": "string",
+            "description": "Assignee identifier."
+          }
+        },
+        "required": [
+          "ticket_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://zendesk.com"
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "twilio",
+  "summary": "Send messages and inspect Twilio logs. Use for notification delivery and diagnosing failed sends.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@twilio-alpha/mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_messages",
+      "description": "Lists recent messages with delivery status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Filter by recipient."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum messages."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "send_message",
+      "description": "Sends an SMS or WhatsApp message. Costs money.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient number in E.164 format."
+          },
+          "from": {
+            "type": "string",
+            "description": "Sender number."
+          },
+          "body": {
+            "type": "string",
+            "description": "Message text."
+          }
+        },
+        "required": [
+          "to",
+          "from",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "get_call_logs",
+      "description": "Lists recent calls with duration and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "description": "Maximum calls."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://twilio.com"
+}

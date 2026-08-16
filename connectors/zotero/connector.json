@@ -1,0 +1,67 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "zotero",
+  "summary": "Search a Zotero reference library and read annotations. Use for managing citations during research.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "zotero-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_items",
+      "description": "Searches the library by title, author or tag.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_item",
+      "description": "Returns an item's full metadata and notes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "item_key": {
+            "type": "string",
+            "description": "Item key."
+          }
+        },
+        "required": [
+          "item_key"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_collections",
+      "description": "Lists collections in the library.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://zotero.org"
+}

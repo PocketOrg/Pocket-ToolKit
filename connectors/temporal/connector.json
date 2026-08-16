@@ -1,0 +1,80 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "temporal",
+  "summary": "Inspect Temporal workflows and their execution history. Use for debugging long-running or stuck workflows.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "temporal-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_workflows",
+      "description": "Lists workflow executions, filtered by status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "List filter query."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum executions."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_workflow_history",
+      "description": "Returns the event history for one execution.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "Workflow identifier."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Run identifier."
+          }
+        },
+        "required": [
+          "workflow_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "describe_workflow",
+      "description": "Returns current status, task queue and pending activities.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "Workflow identifier."
+          }
+        },
+        "required": [
+          "workflow_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://temporal.io"
+}

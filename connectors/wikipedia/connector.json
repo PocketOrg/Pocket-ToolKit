@@ -1,0 +1,78 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "wikipedia",
+  "summary": "Search and read Wikipedia articles. Use for background on unfamiliar topics and factual grounding.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "wikipedia-mcp"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search",
+      "description": "Searches Wikipedia article titles and content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_article",
+      "description": "Returns an article's text.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Article title."
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_summary",
+      "description": "Returns the lead section of an article.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Article title."
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://wikipedia.org"
+}

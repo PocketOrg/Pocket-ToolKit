@@ -1,0 +1,79 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "terraform",
+  "summary": "Look up Terraform providers, modules and registry documentation. Use when writing or reviewing infrastructure code.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "terraform-mcp-server"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_modules",
+      "description": "Searches the Terraform registry for modules.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_provider_docs",
+      "description": "Returns documentation for a provider resource.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Provider name, such as aws."
+          },
+          "resource": {
+            "type": "string",
+            "description": "Resource type name."
+          }
+        },
+        "required": [
+          "provider",
+          "resource"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_module",
+      "description": "Returns a module's inputs, outputs and versions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "type": "string",
+            "description": "Module path, such as terraform-aws-modules/vpc/aws."
+          }
+        },
+        "required": [
+          "module"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://terraform.io"
+}

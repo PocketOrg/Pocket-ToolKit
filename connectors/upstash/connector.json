@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "upstash",
+  "summary": "Manage Upstash Redis and Kafka resources. Use for serverless data infrastructure operations.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@upstash/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_databases",
+      "description": "Lists Redis databases with region and size.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_usage",
+      "description": "Returns command counts and storage for a database.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "database_id": {
+            "type": "string",
+            "description": "Database identifier."
+          }
+        },
+        "required": [
+          "database_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_database",
+      "description": "Creates a Redis database. Incurs cost.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Database name."
+          },
+          "region": {
+            "type": "string",
+            "description": "Region identifier."
+          }
+        },
+        "required": [
+          "name",
+          "region"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://upstash.com"
+}

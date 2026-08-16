@@ -1,0 +1,118 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "trello",
+  "summary": "Read and update Trello boards, lists and cards. Use for lightweight project tracking and status checks.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@delorenj/mcp-server-trello"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_boards",
+      "description": "Lists boards the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_lists",
+      "description": "Lists the lists on a board.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "board_id": {
+            "type": "string",
+            "description": "Board identifier."
+          }
+        },
+        "required": [
+          "board_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_cards",
+      "description": "Returns cards in a list with their labels and due dates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "list_id": {
+            "type": "string",
+            "description": "List identifier."
+          }
+        },
+        "required": [
+          "list_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_card",
+      "description": "Creates a card in a list.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "list_id": {
+            "type": "string",
+            "description": "List identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "Card title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Card body."
+          },
+          "due": {
+            "type": "string",
+            "description": "Due date, ISO 8601."
+          }
+        },
+        "required": [
+          "list_id",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "move_card",
+      "description": "Moves a card to another list.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "description": "Card identifier."
+          },
+          "list_id": {
+            "type": "string",
+            "description": "Destination list identifier."
+          }
+        },
+        "required": [
+          "card_id",
+          "list_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://trello.com"
+}

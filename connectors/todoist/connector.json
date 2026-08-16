@@ -1,0 +1,89 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "todoist",
+  "summary": "Manage Todoist tasks and projects. Use for personal and team task tracking.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@doist/todoist-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_tasks",
+      "description": "Lists active tasks, optionally filtered.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Todoist filter query, such as today."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_task",
+      "description": "Creates a task.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Task text."
+          },
+          "due_string": {
+            "type": "string",
+            "description": "Natural language due date."
+          },
+          "project_id": {
+            "type": "string",
+            "description": "Project identifier."
+          }
+        },
+        "required": [
+          "content"
+        ]
+      }
+    },
+    {
+      "name": "complete_task",
+      "description": "Marks a task complete.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier."
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      }
+    },
+    {
+      "name": "list_projects",
+      "description": "Lists projects.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://todoist.com"
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "youtube",
+  "summary": "Search YouTube and read video transcripts. Use for extracting content from talks and tutorials.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "youtube-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_videos",
+      "description": "Searches for videos by query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_transcript",
+      "description": "Returns a video's transcript.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "video_id": {
+            "type": "string",
+            "description": "Video identifier."
+          }
+        },
+        "required": [
+          "video_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_video_details",
+      "description": "Returns a video's title, channel and statistics.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "video_id": {
+            "type": "string",
+            "description": "Video identifier."
+          }
+        },
+        "required": [
+          "video_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://youtube.com"
+}

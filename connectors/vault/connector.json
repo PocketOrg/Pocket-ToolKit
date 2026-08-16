@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "vault",
+  "summary": "Read HashiCorp Vault secrets metadata and audit policy. Use for secret inventory and access review.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "vault-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_secrets",
+      "description": "Lists secret paths under a mount. Returns names, not values.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mount": {
+            "type": "string",
+            "description": "Secret engine mount path."
+          },
+          "path": {
+            "type": "string",
+            "description": "Path prefix."
+          }
+        },
+        "required": [
+          "mount"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_secret_metadata",
+      "description": "Returns version history and timestamps for a secret.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mount": {
+            "type": "string",
+            "description": "Mount path."
+          },
+          "path": {
+            "type": "string",
+            "description": "Secret path."
+          }
+        },
+        "required": [
+          "mount",
+          "path"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_policies",
+      "description": "Lists policies defined on the server.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://vaultproject.io"
+}
