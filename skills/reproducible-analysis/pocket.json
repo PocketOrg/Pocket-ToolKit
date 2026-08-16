@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Healthcare & Science",
+  "author": "pocket",
+  "roles": [
+    "Scientist",
+    "Data Analyst",
+    "Researcher"
+  ],
+  "license": "MIT"
+}

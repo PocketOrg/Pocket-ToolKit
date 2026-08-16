@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "Product Manager",
+    "Founder",
+    "Tech Lead"
+  ],
+  "license": "MIT"
+}

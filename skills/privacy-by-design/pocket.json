@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Security",
+  "author": "pocket",
+  "roles": [
+    "Engineer",
+    "Product Manager",
+    "Compliance Officer"
+  ],
+  "license": "MIT"
+}

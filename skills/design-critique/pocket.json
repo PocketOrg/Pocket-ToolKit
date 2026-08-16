@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "roles": [
+    "Product Designer",
+    "Design Lead",
+    "Product Manager"
+  ],
+  "license": "MIT"
+}
