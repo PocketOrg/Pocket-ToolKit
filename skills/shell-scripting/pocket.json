@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "roles": [
+    "Engineer",
+    "SRE",
+    "DevOps Engineer"
+  ],
+  "license": "MIT"
+}

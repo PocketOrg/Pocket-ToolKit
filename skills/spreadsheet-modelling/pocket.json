@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "roles": [
+    "Analyst",
+    "Finance",
+    "Founder",
+    "Operations"
+  ],
+  "license": "MIT"
+}
