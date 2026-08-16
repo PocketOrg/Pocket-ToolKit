@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "paypal",
+  "summary": "Inspect PayPal transactions, invoices and disputes. Use for payment reconciliation and billing support.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@paypal/mcp"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_transactions",
+      "description": "Lists transactions in a date range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "description": "Start date, ISO 8601."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "End date, ISO 8601."
+          }
+        },
+        "required": [
+          "start_date",
+          "end_date"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_invoice",
+      "description": "Returns an invoice with its line items and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoice_id": {
+            "type": "string",
+            "description": "Invoice identifier."
+          }
+        },
+        "required": [
+          "invoice_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_disputes",
+      "description": "Lists open disputes needing a response.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://paypal.com"
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "perplexity",
+  "summary": "Ask Perplexity for cited, synthesised answers. Use when a question needs current sources rather than raw links.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@perplexity-ai/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "ask",
+      "description": "Asks a question and returns an answer with citations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Question text."
+          },
+          "model": {
+            "type": "string",
+            "description": "Model name to use."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://perplexity.ai"
+}

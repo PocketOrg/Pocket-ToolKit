@@ -1,0 +1,71 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "snowflake",
+  "summary": "Query Snowflake warehouses and inspect schemas. Use for analytics and warehouse cost investigation.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "snowflake-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_databases",
+      "description": "Lists databases and schemas.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "describe_table",
+      "description": "Returns a table's columns and types.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string",
+            "description": "Fully qualified table name."
+          }
+        },
+        "required": [
+          "table"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query",
+      "description": "Runs a SELECT query. Consumes credits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "SELECT statement."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum rows."
+          }
+        },
+        "required": [
+          "sql"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://snowflake.com"
+}

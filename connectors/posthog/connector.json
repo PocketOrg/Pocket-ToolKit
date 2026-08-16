@@ -1,0 +1,73 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "posthog",
+  "summary": "Query PostHog events, funnels and feature flags. Use for product analytics and experiment results.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@posthog/mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "query_events",
+      "description": "Queries events with filters over a time range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "Event name."
+          },
+          "after": {
+            "type": "string",
+            "description": "Start time."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum events."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_insight",
+      "description": "Returns a saved insight's current result.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "insight_id": {
+            "type": "string",
+            "description": "Insight identifier."
+          }
+        },
+        "required": [
+          "insight_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_feature_flags",
+      "description": "Lists feature flags and rollout percentages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://posthog.com"
+}

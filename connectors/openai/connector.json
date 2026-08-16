@@ -1,0 +1,79 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "openai",
+  "summary": "Call OpenAI models for completion, embeddings and images. Use for delegating a subtask to a specific model.",
+  "category": "AI & Accelerated Computing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "openai-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_models",
+      "description": "Lists models available to the key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_completion",
+      "description": "Generates a completion. Billed per token.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model name."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Prompt text."
+          },
+          "max_tokens": {
+            "type": "number",
+            "description": "Maximum tokens to generate."
+          }
+        },
+        "required": [
+          "model",
+          "prompt"
+        ]
+      }
+    },
+    {
+      "name": "create_embedding",
+      "description": "Returns an embedding vector for text. Billed per token.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Embedding model name."
+          },
+          "input": {
+            "type": "string",
+            "description": "Text to embed."
+          }
+        },
+        "required": [
+          "model",
+          "input"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://openai.com"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "okta",
+  "summary": "Inspect Okta users, groups, applications and system logs. Use for access reviews and login troubleshooting.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "okta-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_users",
+      "description": "Searches users in the directory.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum users."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_groups",
+      "description": "Lists groups and their membership counts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_system_logs",
+      "description": "Returns recent authentication and admin events.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Event filter expression."
+          },
+          "since": {
+            "type": "string",
+            "description": "Start time, ISO 8601."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_applications",
+      "description": "Lists assigned applications and their sign-on modes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://okta.com"
+}

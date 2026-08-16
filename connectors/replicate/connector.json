@@ -1,0 +1,79 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "replicate",
+  "summary": "Run models hosted on Replicate. Use for image generation, upscaling and specialised model inference.",
+  "category": "AI & Accelerated Computing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "replicate-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "search_models",
+      "description": "Searches available models.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "run_prediction",
+      "description": "Runs a model and returns its output. Billed by runtime.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier, such as owner/name."
+          },
+          "input": {
+            "type": "string",
+            "description": "Model inputs as JSON."
+          }
+        },
+        "required": [
+          "model",
+          "input"
+        ]
+      }
+    },
+    {
+      "name": "get_prediction",
+      "description": "Returns the status and output of a prediction.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "prediction_id": {
+            "type": "string",
+            "description": "Prediction identifier."
+          }
+        },
+        "required": [
+          "prediction_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://replicate.com"
+}

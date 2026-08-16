@@ -1,0 +1,68 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "railway",
+  "summary": "Manage Railway projects, services and deployments. Use for checking deploys and reading service logs.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@railway/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_projects",
+      "description": "Lists projects and their services.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_deployments",
+      "description": "Lists recent deployments with status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service_id": {
+            "type": "string",
+            "description": "Service identifier."
+          }
+        },
+        "required": [
+          "service_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_logs",
+      "description": "Returns logs for a deployment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deployment_id": {
+            "type": "string",
+            "description": "Deployment identifier."
+          }
+        },
+        "required": [
+          "deployment_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://railway.app"
+}

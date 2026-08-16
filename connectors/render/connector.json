@@ -1,0 +1,71 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "render",
+  "summary": "Inspect Render services, deploys and logs. Use for deployment status and debugging failed builds.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "render-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_services",
+      "description": "Lists services with type and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_deploys",
+      "description": "Lists deploys for a service.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service_id": {
+            "type": "string",
+            "description": "Service identifier."
+          }
+        },
+        "required": [
+          "service_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_logs",
+      "description": "Returns recent logs for a service.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service_id": {
+            "type": "string",
+            "description": "Service identifier."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum lines."
+          }
+        },
+        "required": [
+          "service_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://render.com"
+}

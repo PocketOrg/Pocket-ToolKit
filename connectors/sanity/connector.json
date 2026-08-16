@@ -1,0 +1,79 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "sanity",
+  "summary": "Query and update Sanity content with GROQ. Use for structured content management.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@sanity/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "query",
+      "description": "Runs a GROQ query against the dataset.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "groq": {
+            "type": "string",
+            "description": "GROQ query."
+          }
+        },
+        "required": [
+          "groq"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_document",
+      "description": "Returns a document by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "Document identifier."
+          }
+        },
+        "required": [
+          "document_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_document",
+      "description": "Creates a document.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Document type."
+          },
+          "fields": {
+            "type": "string",
+            "description": "Field values as JSON."
+          }
+        },
+        "required": [
+          "type",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://sanity.io"
+}

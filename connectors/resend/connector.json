@@ -1,0 +1,82 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "resend",
+  "summary": "Send transactional email and inspect delivery through Resend. Use for developer-focused email workflows.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "resend-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "send_email",
+      "description": "Sends an email. Delivers to real recipients.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient address."
+          },
+          "from": {
+            "type": "string",
+            "description": "Verified sender address."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line."
+          },
+          "html": {
+            "type": "string",
+            "description": "Message body as HTML."
+          }
+        },
+        "required": [
+          "to",
+          "from",
+          "subject",
+          "html"
+        ]
+      }
+    },
+    {
+      "name": "get_email",
+      "description": "Returns an email's delivery status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email_id": {
+            "type": "string",
+            "description": "Email identifier."
+          }
+        },
+        "required": [
+          "email_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_domains",
+      "description": "Lists sending domains and their verification status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://resend.com"
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "prometheus",
+  "summary": "Query Prometheus metrics with PromQL. Use for investigating performance and alert conditions.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "prometheus-mcp-server"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "query",
+      "description": "Runs an instant PromQL query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "PromQL expression."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query_range",
+      "description": "Runs a PromQL query over a time range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "PromQL expression."
+          },
+          "start": {
+            "type": "string",
+            "description": "Start time."
+          },
+          "end": {
+            "type": "string",
+            "description": "End time."
+          },
+          "step": {
+            "type": "string",
+            "description": "Resolution step, such as 1m."
+          }
+        },
+        "required": [
+          "query",
+          "start",
+          "end"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_metrics",
+      "description": "Lists available metric names.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_alerts",
+      "description": "Lists currently firing alerts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://prometheus.io"
+}

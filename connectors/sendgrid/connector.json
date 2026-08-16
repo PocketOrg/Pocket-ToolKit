@@ -1,0 +1,86 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "sendgrid",
+  "summary": "Send transactional email and inspect delivery statistics. Use for email operations and deliverability checks.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "sendgrid-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "get_stats",
+      "description": "Returns delivery, open and bounce statistics.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "description": "Start date, YYYY-MM-DD."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "End date, YYYY-MM-DD."
+          }
+        },
+        "required": [
+          "start_date"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_suppressions",
+      "description": "Lists bounced and unsubscribed addresses.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "send_email",
+      "description": "Sends an email. Delivers to real recipients.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient address."
+          },
+          "from": {
+            "type": "string",
+            "description": "Verified sender address."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line."
+          },
+          "body": {
+            "type": "string",
+            "description": "Message body."
+          }
+        },
+        "required": [
+          "to",
+          "from",
+          "subject",
+          "body"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://sendgrid.com"
+}

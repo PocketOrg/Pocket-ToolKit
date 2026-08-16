@@ -1,0 +1,81 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "puppeteer",
+  "summary": "Control a headless Chrome instance. Use for scraping rendered pages and generating PDFs.",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-puppeteer"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "navigate",
+      "description": "Opens a URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Destination URL."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "get_content",
+      "description": "Returns the rendered HTML of the page.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "click",
+      "description": "Clicks an element by selector.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector."
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      }
+    },
+    {
+      "name": "screenshot",
+      "description": "Captures a screenshot.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "full_page": {
+            "type": "string",
+            "description": "true to capture the whole page."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://pptr.dev"
+}

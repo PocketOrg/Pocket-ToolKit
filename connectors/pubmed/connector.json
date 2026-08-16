@@ -1,0 +1,61 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "pubmed",
+  "summary": "Search PubMed for biomedical literature. Use for clinical and life sciences research.",
+  "category": "Healthcare & Science",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "pubmed-mcp"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search",
+      "description": "Searches PubMed with a query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text or MeSH terms."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_abstract",
+      "description": "Returns a publication's abstract and metadata.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pmid": {
+            "type": "string",
+            "description": "PubMed identifier."
+          }
+        },
+        "required": [
+          "pmid"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://pubmed.ncbi.nlm.nih.gov"
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "obsidian",
+  "summary": "Read and search an Obsidian vault. Use for retrieving personal or team notes and linked knowledge.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mcp-obsidian"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_notes",
+      "description": "Searches note content across the vault.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_note",
+      "description": "Returns a note's markdown content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Note path within the vault."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_notes",
+      "description": "Lists notes, optionally under a folder.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "folder": {
+            "type": "string",
+            "description": "Folder path."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://obsidian.md"
+}

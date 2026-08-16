@@ -1,0 +1,97 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "redis",
+  "summary": "Read and write Redis keys. Use for cache inspection, debugging session state and checking queue depth.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-redis"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "get",
+      "description": "Returns the value at a key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key name."
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_keys",
+      "description": "Lists keys matching a pattern.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Glob pattern, such as session:*."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "set",
+      "description": "Sets a key to a value, optionally with expiry.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to store."
+          },
+          "ttl_seconds": {
+            "type": "number",
+            "description": "Expiry in seconds."
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "delete",
+      "description": "Deletes a key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key name."
+          }
+        },
+        "required": [
+          "key"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://redis.io"
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "sonarqube",
+  "summary": "Read SonarQube issues, hotspots and quality gates. Use for code quality review and security triage.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "sonarqube-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_issues",
+      "description": "Lists issues for a project, filtered by severity or type.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "Project key."
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity filter."
+          },
+          "type": {
+            "type": "string",
+            "description": "BUG, VULNERABILITY or CODE_SMELL."
+          }
+        },
+        "required": [
+          "project"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_quality_gate",
+      "description": "Returns the quality gate status for a project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "Project key."
+          }
+        },
+        "required": [
+          "project"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_hotspots",
+      "description": "Lists security hotspots needing review.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "Project key."
+          }
+        },
+        "required": [
+          "project"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://sonarsource.com"
+}

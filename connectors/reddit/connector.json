@@ -1,0 +1,86 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "reddit",
+  "summary": "Read Reddit posts and comments. Use for community sentiment and finding discussion of a problem.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mcp-server-reddit"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "get_subreddit_posts",
+      "description": "Returns posts from a subreddit.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "subreddit": {
+            "type": "string",
+            "description": "Subreddit name without r/."
+          },
+          "sort": {
+            "type": "string",
+            "description": "hot, new or top."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum posts."
+          }
+        },
+        "required": [
+          "subreddit"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search",
+      "description": "Searches Reddit for posts matching a query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "subreddit": {
+            "type": "string",
+            "description": "Restrict to one subreddit."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_comments",
+      "description": "Returns the comment thread for a post.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_id": {
+            "type": "string",
+            "description": "Post identifier."
+          }
+        },
+        "required": [
+          "post_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://reddit.com"
+}

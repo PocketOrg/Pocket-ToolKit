@@ -1,0 +1,106 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "salesforce",
+  "summary": "Query and update Salesforce records with SOQL. Use for pipeline questions, account lookups and CRM hygiene.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@salesforce/mcp"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "run_soql",
+      "description": "Runs a SOQL query and returns matching records.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "SOQL query text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "describe_object",
+      "description": "Returns the fields and types of an object.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "description": "API name, such as Opportunity."
+          }
+        },
+        "required": [
+          "object"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_record",
+      "description": "Returns one record by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "description": "API name."
+          },
+          "record_id": {
+            "type": "string",
+            "description": "Record identifier."
+          }
+        },
+        "required": [
+          "object",
+          "record_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "update_record",
+      "description": "Updates fields on a record.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "string",
+            "description": "API name."
+          },
+          "record_id": {
+            "type": "string",
+            "description": "Record identifier."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of field values."
+          }
+        },
+        "required": [
+          "object",
+          "record_id",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://salesforce.com"
+}

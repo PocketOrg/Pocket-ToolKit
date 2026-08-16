@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "opsgenie",
+  "summary": "Read Opsgenie alerts and on-call schedules. Use during incidents to find who is on call and what fired.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "opsgenie-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_alerts",
+      "description": "Lists alerts, filtered by status or priority.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Alert search query."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum alerts."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_alert",
+      "description": "Returns an alert with its notes and timeline.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "alert_id": {
+            "type": "string",
+            "description": "Alert identifier."
+          }
+        },
+        "required": [
+          "alert_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "who_is_on_call",
+      "description": "Returns the current on-call responders for a schedule.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "schedule": {
+            "type": "string",
+            "description": "Schedule name or identifier."
+          }
+        },
+        "required": [
+          "schedule"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://atlassian.com/software/opsgenie"
+}
