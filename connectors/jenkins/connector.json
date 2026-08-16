@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "jenkins",
+  "summary": "Inspect Jenkins jobs, builds and console output. Use for CI diagnostics on self-hosted pipelines.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "jenkins-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_jobs",
+      "description": "Lists jobs with their last build status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_build",
+      "description": "Returns a build's result, duration and cause.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "job": {
+            "type": "string",
+            "description": "Job name."
+          },
+          "build_number": {
+            "type": "string",
+            "description": "Build number, or last if omitted."
+          }
+        },
+        "required": [
+          "job"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_console_output",
+      "description": "Returns the console log for a build.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "job": {
+            "type": "string",
+            "description": "Job name."
+          },
+          "build_number": {
+            "type": "string",
+            "description": "Build number."
+          }
+        },
+        "required": [
+          "job",
+          "build_number"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://jenkins.io"
+}

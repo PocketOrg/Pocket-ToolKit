@@ -1,0 +1,67 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "influxdb",
+  "summary": "Query InfluxDB time-series data. Use for metrics, sensor readings and operational telemetry.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "influxdb-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_buckets",
+      "description": "Lists buckets with retention periods.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query",
+      "description": "Runs a Flux query and returns rows.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "flux": {
+            "type": "string",
+            "description": "Flux query text."
+          }
+        },
+        "required": [
+          "flux"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_measurements",
+      "description": "Lists measurements in a bucket.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string",
+            "description": "Bucket name."
+          }
+        },
+        "required": [
+          "bucket"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://influxdata.com"
+}

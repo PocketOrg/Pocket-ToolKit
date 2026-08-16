@@ -1,0 +1,89 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "mixpanel",
+  "summary": "Query Mixpanel events and funnels. Use for product usage analysis and retention reporting.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mixpanel-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "query_events",
+      "description": "Returns event counts over a period.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "Event name."
+          },
+          "from_date": {
+            "type": "string",
+            "description": "Start date."
+          },
+          "to_date": {
+            "type": "string",
+            "description": "End date."
+          }
+        },
+        "required": [
+          "event",
+          "from_date",
+          "to_date"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_funnel",
+      "description": "Returns conversion rates for a saved funnel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "funnel_id": {
+            "type": "string",
+            "description": "Funnel identifier."
+          }
+        },
+        "required": [
+          "funnel_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_retention",
+      "description": "Returns a retention cohort table.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from_date": {
+            "type": "string",
+            "description": "Start date."
+          },
+          "to_date": {
+            "type": "string",
+            "description": "End date."
+          }
+        },
+        "required": [
+          "from_date",
+          "to_date"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://mixpanel.com"
+}

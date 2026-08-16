@@ -1,0 +1,80 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "dynatrace",
+  "summary": "Query Dynatrace problems, traces and metrics. Use for root cause analysis across a monitored estate.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@dynatrace-oss/dynatrace-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_problems",
+      "description": "Lists open and recent problems.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Start of time range."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_problem",
+      "description": "Returns a problem with affected entities and root cause.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "problem_id": {
+            "type": "string",
+            "description": "Problem identifier."
+          }
+        },
+        "required": [
+          "problem_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query_metrics",
+      "description": "Queries a metric selector over a time range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "Metric selector."
+          },
+          "from": {
+            "type": "string",
+            "description": "Start time."
+          },
+          "to": {
+            "type": "string",
+            "description": "End time."
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://dynatrace.com"
+}

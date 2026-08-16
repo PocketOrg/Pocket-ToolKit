@@ -1,0 +1,83 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "mapbox",
+  "summary": "Geocode, route and query map data with Mapbox. Use for location intelligence and map generation.",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@mapbox/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "geocode",
+      "description": "Converts a place name to coordinates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Place or address text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "reverse_geocode",
+      "description": "Converts coordinates to a place name.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "longitude": {
+            "type": "string",
+            "description": "Longitude."
+          },
+          "latitude": {
+            "type": "string",
+            "description": "Latitude."
+          }
+        },
+        "required": [
+          "longitude",
+          "latitude"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_directions",
+      "description": "Returns a route with distance and duration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "coordinates": {
+            "type": "string",
+            "description": "Semicolon-separated lon,lat pairs."
+          },
+          "profile": {
+            "type": "string",
+            "description": "driving, walking or cycling."
+          }
+        },
+        "required": [
+          "coordinates"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://mapbox.com"
+}

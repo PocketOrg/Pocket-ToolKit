@@ -1,0 +1,71 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "mysql",
+  "summary": "Query MySQL databases and inspect schemas. Use for reporting, debugging and understanding an unfamiliar database.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@benborla29/mcp-server-mysql"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_tables",
+      "description": "Lists tables with row estimates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "describe_table",
+      "description": "Returns columns, types and indexes for a table.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string",
+            "description": "Table name."
+          }
+        },
+        "required": [
+          "table"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query",
+      "description": "Runs a read-only SQL query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "SELECT statement."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum rows to return."
+          }
+        },
+        "required": [
+          "sql"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://mysql.com"
+}

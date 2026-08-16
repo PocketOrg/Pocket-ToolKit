@@ -1,0 +1,88 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "kafka",
+  "summary": "Inspect Kafka topics, consumer groups and lag. Use for diagnosing streaming pipelines and backlogs.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "kafka-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_topics",
+      "description": "Lists topics with partition counts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "describe_topic",
+      "description": "Returns a topic's partitions, replicas and configuration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Topic name."
+          }
+        },
+        "required": [
+          "topic"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_consumer_lag",
+      "description": "Returns consumer group offsets and lag per partition.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "description": "Consumer group id."
+          }
+        },
+        "required": [
+          "group"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "consume_messages",
+      "description": "Reads recent messages from a topic.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Topic name."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum messages."
+          }
+        },
+        "required": [
+          "topic"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://kafka.apache.org"
+}

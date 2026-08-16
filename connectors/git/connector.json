@@ -1,0 +1,97 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "git",
+  "summary": "Read local Git history, diffs and branches. Use for understanding how code reached its current state.",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mcp-server-git"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "git_log",
+      "description": "Returns commit history for a path or branch.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File or directory to filter by."
+          },
+          "max_count": {
+            "type": "number",
+            "description": "Maximum commits."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "git_diff",
+      "description": "Returns the diff between two refs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Base ref."
+          },
+          "to": {
+            "type": "string",
+            "description": "Target ref, defaults to working tree."
+          }
+        },
+        "required": [
+          "from"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "git_show",
+      "description": "Returns a commit's message and changes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "commit": {
+            "type": "string",
+            "description": "Commit hash or ref."
+          }
+        },
+        "required": [
+          "commit"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "git_blame",
+      "description": "Returns line-by-line authorship for a file.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://git-scm.com"
+}

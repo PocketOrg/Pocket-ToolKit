@@ -1,0 +1,61 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "hackerone",
+  "summary": "Read HackerOne reports and program activity. Use for vulnerability disclosure triage.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "hackerone-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_reports",
+      "description": "Lists reports for a program, filtered by state.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "program": {
+            "type": "string",
+            "description": "Program handle."
+          },
+          "state": {
+            "type": "string",
+            "description": "Report state filter."
+          }
+        },
+        "required": [
+          "program"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_report",
+      "description": "Returns a report with its timeline and severity.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "report_id": {
+            "type": "string",
+            "description": "Report identifier."
+          }
+        },
+        "required": [
+          "report_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://hackerone.com"
+}

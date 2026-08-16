@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "dropbox",
+  "summary": "List, read and search files in Dropbox. Use for retrieving shared documents and assets.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "dropbox-mcp-server"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_files",
+      "description": "Lists files and folders under a path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Folder path, or root if omitted."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search",
+      "description": "Searches files by name or content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_file",
+      "description": "Returns a file's contents.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "File path."
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://dropbox.com"
+}

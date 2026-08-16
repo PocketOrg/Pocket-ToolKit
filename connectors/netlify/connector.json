@@ -1,0 +1,68 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "netlify",
+  "summary": "Manage Netlify sites, deploys and environment variables. Use for frontend deployment operations.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "netlify-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_sites",
+      "description": "Lists sites with their production URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_deploys",
+      "description": "Lists deploys for a site with status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "description": "Site identifier."
+          }
+        },
+        "required": [
+          "site_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_deploy_log",
+      "description": "Returns the build log for a deploy.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "deploy_id": {
+            "type": "string",
+            "description": "Deploy identifier."
+          }
+        },
+        "required": [
+          "deploy_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://netlify.com"
+}

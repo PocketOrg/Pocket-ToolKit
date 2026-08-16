@@ -1,0 +1,94 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "keycloak",
+  "summary": "Manage Keycloak realms, clients and users. Use for self-hosted identity administration and debugging.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "keycloak-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_realms",
+      "description": "Lists realms on the server.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_clients",
+      "description": "Lists clients in a realm.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "realm": {
+            "type": "string",
+            "description": "Realm name."
+          }
+        },
+        "required": [
+          "realm"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search_users",
+      "description": "Searches users in a realm.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "realm": {
+            "type": "string",
+            "description": "Realm name."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "realm"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_user_sessions",
+      "description": "Returns active sessions for a user.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "realm": {
+            "type": "string",
+            "description": "Realm name."
+          },
+          "user_id": {
+            "type": "string",
+            "description": "User identifier."
+          }
+        },
+        "required": [
+          "realm",
+          "user_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://keycloak.org"
+}

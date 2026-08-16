@@ -1,0 +1,87 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "google-maps",
+  "summary": "Geocode addresses, search places and get directions. Use for location lookups and travel planning.",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-google-maps"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "geocode",
+      "description": "Converts an address to coordinates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address text."
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search_places",
+      "description": "Searches for places near a location.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "location": {
+            "type": "string",
+            "description": "Latitude,longitude to search near."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_directions",
+      "description": "Returns a route between two points.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "description": "Start address or coordinates."
+          },
+          "destination": {
+            "type": "string",
+            "description": "End address or coordinates."
+          },
+          "mode": {
+            "type": "string",
+            "description": "driving, walking or transit."
+          }
+        },
+        "required": [
+          "origin",
+          "destination"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://maps.google.com"
+}

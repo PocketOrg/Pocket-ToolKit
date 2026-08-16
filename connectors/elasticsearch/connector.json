@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "elasticsearch",
+  "summary": "Search and inspect Elasticsearch indices. Use for log analysis, full-text search and index diagnostics.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@elastic/mcp-server-elasticsearch"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_indices",
+      "description": "Lists indices with document counts and size.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_mappings",
+      "description": "Returns the field mappings for an index.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Index name."
+          }
+        },
+        "required": [
+          "index"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search",
+      "description": "Runs a query DSL search against an index.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Index name."
+          },
+          "query": {
+            "type": "string",
+            "description": "Query DSL as JSON."
+          },
+          "size": {
+            "type": "number",
+            "description": "Maximum hits to return."
+          }
+        },
+        "required": [
+          "index",
+          "query"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://elastic.co"
+}

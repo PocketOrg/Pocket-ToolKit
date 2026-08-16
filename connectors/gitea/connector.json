@@ -1,0 +1,117 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "gitea",
+  "summary": "Browse Gitea repositories, issues and pull requests. Use for self-hosted Git workflows.",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "gitea-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_repos",
+      "description": "Lists repositories the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_issues",
+      "description": "Lists issues for a repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Owner name."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "state": {
+            "type": "string",
+            "description": "open or closed."
+          }
+        },
+        "required": [
+          "owner",
+          "repo"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_pull_request",
+      "description": "Returns a pull request with its diff summary.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Owner name."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "index": {
+            "type": "string",
+            "description": "Pull request number."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "index"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_issue",
+      "description": "Opens an issue.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Owner name."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository name."
+          },
+          "title": {
+            "type": "string",
+            "description": "Issue title."
+          },
+          "body": {
+            "type": "string",
+            "description": "Issue description."
+          }
+        },
+        "required": [
+          "owner",
+          "repo",
+          "title"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://gitea.io"
+}

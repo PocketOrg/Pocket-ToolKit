@@ -1,0 +1,54 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "hugging-face",
+  "summary": "Call Hugging Face Spaces as tools. Use to run hosted models for images, audio and text without local GPUs.",
+  "category": "AI & Accelerated Computing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@llmindset/mcp-hfspace"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_spaces",
+      "description": "Lists configured Spaces available as tools.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "call_space",
+      "description": "Runs a Space with the given inputs. May incur compute cost.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "space": {
+            "type": "string",
+            "description": "Space identifier, such as owner/name."
+          },
+          "inputs": {
+            "type": "string",
+            "description": "Inputs as JSON matching the Space's signature."
+          }
+        },
+        "required": [
+          "space",
+          "inputs"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://huggingface.co"
+}

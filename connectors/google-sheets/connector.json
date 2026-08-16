@@ -1,0 +1,98 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "google-sheets",
+  "summary": "Read and write Google Sheets. Use for lightweight shared data, trackers and report exports.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "google-sheets-mcp"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "read_range",
+      "description": "Reads values from a range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "spreadsheet_id": {
+            "type": "string",
+            "description": "Spreadsheet identifier."
+          },
+          "range": {
+            "type": "string",
+            "description": "A1 notation range."
+          }
+        },
+        "required": [
+          "spreadsheet_id",
+          "range"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "write_range",
+      "description": "Writes values to a range, overwriting existing cells.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "spreadsheet_id": {
+            "type": "string",
+            "description": "Spreadsheet identifier."
+          },
+          "range": {
+            "type": "string",
+            "description": "A1 notation range."
+          },
+          "values": {
+            "type": "string",
+            "description": "Rows as a JSON array of arrays."
+          }
+        },
+        "required": [
+          "spreadsheet_id",
+          "range",
+          "values"
+        ]
+      }
+    },
+    {
+      "name": "append_row",
+      "description": "Appends a row to a sheet.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "spreadsheet_id": {
+            "type": "string",
+            "description": "Spreadsheet identifier."
+          },
+          "range": {
+            "type": "string",
+            "description": "Sheet or range to append to."
+          },
+          "values": {
+            "type": "string",
+            "description": "Row values as a JSON array."
+          }
+        },
+        "required": [
+          "spreadsheet_id",
+          "range",
+          "values"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://sheets.google.com"
+}

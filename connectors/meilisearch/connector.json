@@ -1,0 +1,98 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "meilisearch",
+  "summary": "Search and manage Meilisearch indexes. Use for fast typo-tolerant search over application data.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "meilisearch-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_indexes",
+      "description": "Lists indexes with document counts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search",
+      "description": "Searches an index and returns ranked hits.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Index name."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum hits."
+          }
+        },
+        "required": [
+          "index",
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_settings",
+      "description": "Returns an index's searchable and filterable attributes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Index name."
+          }
+        },
+        "required": [
+          "index"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "add_documents",
+      "description": "Adds or replaces documents in an index.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "string",
+            "description": "Index name."
+          },
+          "documents": {
+            "type": "string",
+            "description": "Documents as a JSON array."
+          }
+        },
+        "required": [
+          "index",
+          "documents"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://meilisearch.com"
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "heroku",
+  "summary": "Manage Heroku apps, dynos, config and logs. Use for deployment checks and incident response.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@heroku/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_apps",
+      "description": "Lists apps the account can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_logs",
+      "description": "Returns recent log output for an app.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "type": "string",
+            "description": "App name."
+          },
+          "lines": {
+            "type": "number",
+            "description": "Number of lines."
+          }
+        },
+        "required": [
+          "app"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_dynos",
+      "description": "Lists dynos with size and state.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "type": "string",
+            "description": "App name."
+          }
+        },
+        "required": [
+          "app"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "restart_dynos",
+      "description": "Restarts an app's dynos. Causes brief downtime.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "type": "string",
+            "description": "App name."
+          }
+        },
+        "required": [
+          "app"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://heroku.com"
+}

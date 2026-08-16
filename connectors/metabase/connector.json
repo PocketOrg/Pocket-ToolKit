@@ -1,0 +1,60 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "metabase",
+  "summary": "Run Metabase questions and browse dashboards. Use for self-service analytics over an existing BI setup.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@cognitionai/metabase-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_dashboards",
+      "description": "Lists dashboards and their cards.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "run_card",
+      "description": "Runs a saved question and returns rows.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "description": "Card identifier."
+          }
+        },
+        "required": [
+          "card_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_databases",
+      "description": "Lists connected databases and schemas.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://metabase.com"
+}

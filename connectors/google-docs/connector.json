@@ -1,0 +1,82 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "google-docs",
+  "summary": "Read and edit Google Docs. Use for drafting, reviewing and extracting document content.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "google-docs-mcp"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "read_document",
+      "description": "Returns a document's text content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "Document identifier."
+          }
+        },
+        "required": [
+          "document_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_document",
+      "description": "Creates a document with optional content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Document title."
+          },
+          "content": {
+            "type": "string",
+            "description": "Initial body text."
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    {
+      "name": "append_text",
+      "description": "Appends text to the end of a document.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "Document identifier."
+          },
+          "text": {
+            "type": "string",
+            "description": "Text to append."
+          }
+        },
+        "required": [
+          "document_id",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://docs.google.com"
+}
