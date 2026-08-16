@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "canva",
+  "summary": "Work with Canva designs and assets. Use for generating and exporting branded visual content.",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@canva/cli"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_designs",
+      "description": "Lists designs in the account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "description": "Maximum designs."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_design",
+      "description": "Returns a design's metadata and pages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "design_id": {
+            "type": "string",
+            "description": "Design identifier."
+          }
+        },
+        "required": [
+          "design_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "export_design",
+      "description": "Exports a design to an image or PDF.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "design_id": {
+            "type": "string",
+            "description": "Design identifier."
+          },
+          "format": {
+            "type": "string",
+            "description": "png, jpg or pdf."
+          }
+        },
+        "required": [
+          "design_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://canva.com"
+}

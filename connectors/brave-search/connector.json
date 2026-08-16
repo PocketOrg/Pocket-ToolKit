@@ -1,0 +1,65 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "brave-search",
+  "summary": "Search the web with Brave's independent index. Use for privacy-respecting search with structured results.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@brave/brave-search-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "brave_web_search",
+      "description": "Searches the web and returns ranked results.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "count": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "brave_news_search",
+      "description": "Searches recent news.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "count": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://brave.com/search/api"
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "asana",
+  "summary": "Read and update Asana projects, tasks and comments. Use to check assignments, track delivery and file work.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@roychri/mcp-server-asana"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_workspaces",
+      "description": "Lists workspaces the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search_tasks",
+      "description": "Searches tasks by text within a workspace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Workspace identifier."
+          },
+          "query": {
+            "type": "string",
+            "description": "Text to search for."
+          }
+        },
+        "required": [
+          "workspace",
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_task",
+      "description": "Returns a task with assignee, due date and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier."
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_task",
+      "description": "Creates a task in a project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "description": "Project identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "Task title."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Task description."
+          },
+          "assignee": {
+            "type": "string",
+            "description": "User identifier or email."
+          },
+          "due_on": {
+            "type": "string",
+            "description": "Due date, YYYY-MM-DD."
+          }
+        },
+        "required": [
+          "project_id",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "add_comment",
+      "description": "Adds a comment to a task.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier."
+          },
+          "text": {
+            "type": "string",
+            "description": "Comment body."
+          }
+        },
+        "required": [
+          "task_id",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://asana.com"
+}

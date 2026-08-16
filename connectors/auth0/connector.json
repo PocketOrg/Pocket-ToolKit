@@ -1,0 +1,81 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "auth0",
+  "summary": "Inspect Auth0 tenants, applications, connections and logs. Use to diagnose authentication failures and audit access configuration.",
+  "category": "Security",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@auth0/auth0-mcp-server"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_applications",
+      "description": "Lists applications in the tenant.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_connections",
+      "description": "Lists identity connections and their strategies.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_logs",
+      "description": "Returns recent authentication log events.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Log search query."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum events to return."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_users",
+      "description": "Searches users in the tenant directory.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Lucene query over user fields."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum users to return."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://auth0.com"
+}

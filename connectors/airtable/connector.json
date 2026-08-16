@@ -1,0 +1,148 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "airtable",
+  "summary": "Read and update Airtable bases, tables and records. Use for lightweight operational data an agent must query or maintain.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "airtable-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_bases",
+      "description": "Lists the bases the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_records",
+      "description": "Lists records from a table, optionally filtered by a formula.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "base_id": {
+            "type": "string",
+            "description": "Base identifier."
+          },
+          "table": {
+            "type": "string",
+            "description": "Table name or id."
+          },
+          "filter_by_formula": {
+            "type": "string",
+            "description": "Airtable formula limiting which records return."
+          },
+          "max_records": {
+            "type": "number",
+            "description": "Maximum records to return."
+          }
+        },
+        "required": [
+          "base_id",
+          "table"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_record",
+      "description": "Returns one record with all its fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "base_id": {
+            "type": "string",
+            "description": "Base identifier."
+          },
+          "table": {
+            "type": "string",
+            "description": "Table name or id."
+          },
+          "record_id": {
+            "type": "string",
+            "description": "Record identifier."
+          }
+        },
+        "required": [
+          "base_id",
+          "table",
+          "record_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_record",
+      "description": "Creates a record in a table.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "base_id": {
+            "type": "string",
+            "description": "Base identifier."
+          },
+          "table": {
+            "type": "string",
+            "description": "Table name or id."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of field values."
+          }
+        },
+        "required": [
+          "base_id",
+          "table",
+          "fields"
+        ]
+      }
+    },
+    {
+      "name": "update_record",
+      "description": "Updates fields on an existing record.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "base_id": {
+            "type": "string",
+            "description": "Base identifier."
+          },
+          "table": {
+            "type": "string",
+            "description": "Table name or id."
+          },
+          "record_id": {
+            "type": "string",
+            "description": "Record identifier."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of field values to change."
+          }
+        },
+        "required": [
+          "base_id",
+          "table",
+          "record_id",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://airtable.com"
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "discord",
+  "summary": "Read and post to Discord channels. Use for community support, release announcements and monitoring discussion.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mcp-discord"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_channels",
+      "description": "Lists channels in a server.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "guild_id": {
+            "type": "string",
+            "description": "Server identifier."
+          }
+        },
+        "required": [
+          "guild_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_messages",
+      "description": "Reads recent messages from a channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "description": "Channel identifier."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum messages to return."
+          }
+        },
+        "required": [
+          "channel_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "send_message",
+      "description": "Posts a message to a channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {
+            "type": "string",
+            "description": "Channel identifier."
+          },
+          "content": {
+            "type": "string",
+            "description": "Message text."
+          }
+        },
+        "required": [
+          "channel_id",
+          "content"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://discord.com"
+}

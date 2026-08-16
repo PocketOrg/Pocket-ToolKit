@@ -1,0 +1,79 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "circleci",
+  "summary": "Inspect CircleCI pipelines, workflows and build failures. Use to diagnose why a build broke.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@circleci/mcp-server-circleci"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_pipelines",
+      "description": "Lists recent pipelines for a project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_slug": {
+            "type": "string",
+            "description": "Project slug, such as gh/org/repo."
+          }
+        },
+        "required": [
+          "project_slug"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_build_failure",
+      "description": "Returns the failing step and its log output.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_slug": {
+            "type": "string",
+            "description": "Project slug."
+          },
+          "job_number": {
+            "type": "string",
+            "description": "Job number."
+          }
+        },
+        "required": [
+          "project_slug",
+          "job_number"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_workflows",
+      "description": "Lists workflows in a pipeline with their status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pipeline_id": {
+            "type": "string",
+            "description": "Pipeline identifier."
+          }
+        },
+        "required": [
+          "pipeline_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://circleci.com"
+}

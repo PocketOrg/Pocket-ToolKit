@@ -1,0 +1,71 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "clickhouse",
+  "summary": "Query ClickHouse for analytical workloads. Use for large-scale aggregation over event and log data.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "clickhouse-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_databases",
+      "description": "Lists databases on the cluster.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_tables",
+      "description": "Lists tables with engine and size.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "database": {
+            "type": "string",
+            "description": "Database name."
+          }
+        },
+        "required": [
+          "database"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query",
+      "description": "Runs a SELECT query.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "SELECT statement."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum rows."
+          }
+        },
+        "required": [
+          "sql"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://clickhouse.com"
+}

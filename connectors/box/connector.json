@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "box",
+  "summary": "Browse and read files in Box. Use for enterprise document retrieval and content search.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "box-mcp-server"
+    ]
+  },
+  "auth": "oauth",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_items",
+      "description": "Lists items in a folder.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "folder_id": {
+            "type": "string",
+            "description": "Folder identifier, or root if omitted."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search",
+      "description": "Searches files by name and content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_file",
+      "description": "Returns a file's text content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "description": "File identifier."
+          }
+        },
+        "required": [
+          "file_id"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://box.com"
+}

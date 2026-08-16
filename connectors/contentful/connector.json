@@ -1,0 +1,86 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "contentful",
+  "summary": "Read and update Contentful entries and content types. Use for headless CMS content operations.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@contentful/mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_entries",
+      "description": "Lists entries of a content type.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content_type": {
+            "type": "string",
+            "description": "Content type id."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum entries."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_entry",
+      "description": "Returns an entry with all its fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entry_id": {
+            "type": "string",
+            "description": "Entry identifier."
+          }
+        },
+        "required": [
+          "entry_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_content_types",
+      "description": "Lists content types and their fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "publish_entry",
+      "description": "Publishes an entry, making it live.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entry_id": {
+            "type": "string",
+            "description": "Entry identifier."
+          }
+        },
+        "required": [
+          "entry_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://contentful.com"
+}

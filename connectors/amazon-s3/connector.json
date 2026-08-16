@@ -1,0 +1,80 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "amazon-s3",
+  "summary": "List and read objects in S3 buckets. Use for inspecting data lakes, logs and stored artefacts.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "s3-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_buckets",
+      "description": "Lists buckets the credentials can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_objects",
+      "description": "Lists objects under a prefix.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string",
+            "description": "Bucket name."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "Key prefix to filter by."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum objects."
+          }
+        },
+        "required": [
+          "bucket"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_object",
+      "description": "Reads an object's contents.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string",
+            "description": "Bucket name."
+          },
+          "key": {
+            "type": "string",
+            "description": "Object key."
+          }
+        },
+        "required": [
+          "bucket",
+          "key"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://aws.amazon.com/s3"
+}

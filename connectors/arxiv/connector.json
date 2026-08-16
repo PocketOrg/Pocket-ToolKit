@@ -1,0 +1,81 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "arxiv",
+  "summary": "Search and read arXiv preprints. Use for literature review in physics, mathematics and computer science.",
+  "category": "Healthcare & Science",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "arxiv-mcp-server"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_papers",
+      "description": "Searches arXiv by query, author or category.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search text."
+          },
+          "category": {
+            "type": "string",
+            "description": "arXiv category, such as cs.LG."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum papers."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_paper",
+      "description": "Returns a paper's abstract and metadata.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "arxiv_id": {
+            "type": "string",
+            "description": "arXiv identifier."
+          }
+        },
+        "required": [
+          "arxiv_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "download_paper",
+      "description": "Downloads a paper's full text for reading.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "arxiv_id": {
+            "type": "string",
+            "description": "arXiv identifier."
+          }
+        },
+        "required": [
+          "arxiv_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://arxiv.org"
+}

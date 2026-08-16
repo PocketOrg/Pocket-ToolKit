@@ -1,0 +1,104 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "datadog",
+  "summary": "Query Datadog metrics, monitors, logs and incidents. Use to investigate alerts and check service health.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@winor30/mcp-server-datadog"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "query_metrics",
+      "description": "Queries a metric over a time range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Datadog metric query."
+          },
+          "from": {
+            "type": "string",
+            "description": "Start time, epoch seconds."
+          },
+          "to": {
+            "type": "string",
+            "description": "End time, epoch seconds."
+          }
+        },
+        "required": [
+          "query",
+          "from",
+          "to"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_monitors",
+      "description": "Lists monitors and their current states.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "group_states": {
+            "type": "string",
+            "description": "Filter by state, such as alert."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search_logs",
+      "description": "Searches logs over a time range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Log search query."
+          },
+          "from": {
+            "type": "string",
+            "description": "Start time."
+          },
+          "to": {
+            "type": "string",
+            "description": "End time."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum entries."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_incidents",
+      "description": "Lists recent incidents.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://datadoghq.com"
+}

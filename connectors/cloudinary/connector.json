@@ -1,0 +1,82 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "cloudinary",
+  "summary": "Manage and transform images and video in Cloudinary. Use for asset delivery and media pipelines.",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "cloudinary-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "search_assets",
+      "description": "Searches media assets by tag, folder or format.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "type": "string",
+            "description": "Search expression."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum assets."
+          }
+        },
+        "required": [
+          "expression"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_asset",
+      "description": "Returns an asset's metadata and delivery URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "public_id": {
+            "type": "string",
+            "description": "Asset public id."
+          }
+        },
+        "required": [
+          "public_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "upload_asset",
+      "description": "Uploads a file to the media library.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "File path or URL."
+          },
+          "folder": {
+            "type": "string",
+            "description": "Destination folder."
+          }
+        },
+        "required": [
+          "file"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://cloudinary.com"
+}

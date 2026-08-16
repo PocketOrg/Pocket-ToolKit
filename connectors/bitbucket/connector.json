@@ -1,0 +1,135 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "bitbucket",
+  "summary": "Browse Bitbucket repositories, pull requests and pipelines. Use for code review and release checks on Bitbucket-hosted code.",
+  "category": "Software Engineering",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@nexus2520/bitbucket-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_pull_requests",
+      "description": "Lists open pull requests for a repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Workspace slug."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository slug."
+          },
+          "state": {
+            "type": "string",
+            "description": "OPEN, MERGED or DECLINED."
+          }
+        },
+        "required": [
+          "workspace",
+          "repo"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_pull_request",
+      "description": "Returns a pull request with its description and reviewers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Workspace slug."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository slug."
+          },
+          "id": {
+            "type": "string",
+            "description": "Pull request number."
+          }
+        },
+        "required": [
+          "workspace",
+          "repo",
+          "id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_diff",
+      "description": "Returns the diff for a pull request.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Workspace slug."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository slug."
+          },
+          "id": {
+            "type": "string",
+            "description": "Pull request number."
+          }
+        },
+        "required": [
+          "workspace",
+          "repo",
+          "id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "add_pr_comment",
+      "description": "Comments on a pull request.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "workspace": {
+            "type": "string",
+            "description": "Workspace slug."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository slug."
+          },
+          "id": {
+            "type": "string",
+            "description": "Pull request number."
+          },
+          "text": {
+            "type": "string",
+            "description": "Comment body."
+          }
+        },
+        "required": [
+          "workspace",
+          "repo",
+          "id",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://bitbucket.org"
+}

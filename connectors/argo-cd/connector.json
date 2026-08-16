@@ -1,0 +1,67 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "argo-cd",
+  "summary": "Inspect Argo CD applications and sync status. Use to check what is deployed and why a sync failed.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "argocd-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_applications",
+      "description": "Lists applications with sync and health status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_application",
+      "description": "Returns an application's resources and last sync result.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Application name."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_sync_history",
+      "description": "Returns recent sync operations for an application.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Application name."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://argo-cd.readthedocs.io"
+}

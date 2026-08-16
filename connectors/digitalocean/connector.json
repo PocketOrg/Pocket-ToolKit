@@ -1,0 +1,71 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "digitalocean",
+  "summary": "Manage DigitalOcean droplets, databases and app platform deployments. Use for infrastructure operations.",
+  "category": "Cloud & DevOps",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@digitalocean/mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_droplets",
+      "description": "Lists droplets with size, region and status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_apps",
+      "description": "Lists App Platform apps and deployment status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_app_logs",
+      "description": "Returns logs for an app deployment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "app_id": {
+            "type": "string",
+            "description": "App identifier."
+          }
+        },
+        "required": [
+          "app_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_databases",
+      "description": "Lists managed database clusters.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://digitalocean.com"
+}

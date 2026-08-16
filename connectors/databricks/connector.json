@@ -1,0 +1,64 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "databricks",
+  "summary": "Query Databricks tables and inspect jobs. Use for lakehouse analytics and pipeline monitoring.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "databricks-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_catalogs",
+      "description": "Lists Unity Catalog catalogs and schemas.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "query",
+      "description": "Runs a SQL query against a warehouse.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "SELECT statement."
+          },
+          "warehouse_id": {
+            "type": "string",
+            "description": "SQL warehouse identifier."
+          }
+        },
+        "required": [
+          "sql"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_jobs",
+      "description": "Lists jobs with their last run status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://databricks.com"
+}

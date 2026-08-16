@@ -1,0 +1,115 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "clickup",
+  "summary": "Manage ClickUp tasks, lists and docs. Use for project tracking in a ClickUp workspace.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@taazkareem/clickup-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_tasks",
+      "description": "Lists tasks in a list with status and assignee.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "list_id": {
+            "type": "string",
+            "description": "List identifier."
+          },
+          "status": {
+            "type": "string",
+            "description": "Filter by status."
+          }
+        },
+        "required": [
+          "list_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_task",
+      "description": "Returns a task with description and custom fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier."
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_task",
+      "description": "Creates a task in a list.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "list_id": {
+            "type": "string",
+            "description": "List identifier."
+          },
+          "name": {
+            "type": "string",
+            "description": "Task title."
+          },
+          "description": {
+            "type": "string",
+            "description": "Task body."
+          },
+          "assignees": {
+            "type": "string",
+            "description": "Assignee ids as JSON array."
+          }
+        },
+        "required": [
+          "list_id",
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "update_task",
+      "description": "Updates a task's status or fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Task identifier."
+          },
+          "status": {
+            "type": "string",
+            "description": "New status."
+          },
+          "description": {
+            "type": "string",
+            "description": "New description."
+          }
+        },
+        "required": [
+          "task_id"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://clickup.com"
+}
