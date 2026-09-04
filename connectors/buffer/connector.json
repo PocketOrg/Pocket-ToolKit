@@ -1,0 +1,74 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "buffer",
+  "summary": "Queue and read scheduled social posts across connected channels. Use for social scheduling without giving an agent each platform's credentials.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "buffer-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_channels",
+      "description": "Lists connected social channels.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_scheduled",
+      "description": "Lists queued posts for a channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string",
+            "description": "Channel id."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_post",
+      "description": "Adds a post to a channel's queue.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string",
+            "description": "Channel id."
+          },
+          "text": {
+            "type": "string",
+            "description": "Post text."
+          },
+          "scheduledAt": {
+            "type": "string",
+            "description": "ISO time to publish."
+          }
+        },
+        "required": [
+          "channelId",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://buffer.com"
+}

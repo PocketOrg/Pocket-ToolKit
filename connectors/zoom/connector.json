@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "zoom",
+  "summary": "Create and read Zoom meetings. Use for scheduling calls and retrieving joining details.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "zoom-mcp-server"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_meetings",
+      "description": "Lists upcoming meetings for the authorised user.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_meeting",
+      "description": "Reads a meeting's details and join URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "meetingId": {
+            "type": "string",
+            "description": "Meeting id."
+          }
+        },
+        "required": [
+          "meetingId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_meeting",
+      "description": "Schedules a meeting.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Meeting topic."
+          },
+          "startTime": {
+            "type": "string",
+            "description": "ISO start time."
+          },
+          "duration": {
+            "type": "number",
+            "description": "Duration in minutes."
+          }
+        },
+        "required": [
+          "topic",
+          "startTime"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://zoom.us"
+}

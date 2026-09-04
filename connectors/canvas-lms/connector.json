@@ -1,0 +1,89 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "canvas-lms",
+  "summary": "Read Canvas courses, assignments and submissions. Use for teaching and learning administration where Canvas is the LMS.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "canvas-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_courses",
+      "description": "Lists courses the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_assignments",
+      "description": "Lists assignments in a course.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "description": "Course id."
+          }
+        },
+        "required": [
+          "courseId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_submissions",
+      "description": "Lists submissions for an assignment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "description": "Course id."
+          },
+          "assignmentId": {
+            "type": "string",
+            "description": "Assignment id."
+          }
+        },
+        "required": [
+          "courseId",
+          "assignmentId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_course_content",
+      "description": "Reads a course's pages and modules.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "description": "Course id."
+          }
+        },
+        "required": [
+          "courseId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.instructure.com/canvas"
+}

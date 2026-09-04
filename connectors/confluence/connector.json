@@ -1,0 +1,109 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "confluence",
+  "summary": "Search, read and write Confluence pages. Use where team knowledge lives in Confluence rather than a repository.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "confluence-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "search",
+      "description": "Searches pages by text or CQL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search terms or CQL."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_page",
+      "description": "Reads one page's content.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "string",
+            "description": "Page id."
+          }
+        },
+        "required": [
+          "pageId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_page",
+      "description": "Creates a page in a space.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "spaceKey": {
+            "type": "string",
+            "description": "Space key."
+          },
+          "title": {
+            "type": "string",
+            "description": "Page title."
+          },
+          "body": {
+            "type": "string",
+            "description": "Page body in storage format."
+          }
+        },
+        "required": [
+          "spaceKey",
+          "title",
+          "body"
+        ]
+      }
+    },
+    {
+      "name": "update_page",
+      "description": "Updates an existing page.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "pageId": {
+            "type": "string",
+            "description": "Page id."
+          },
+          "body": {
+            "type": "string",
+            "description": "New page body."
+          },
+          "version": {
+            "type": "number",
+            "description": "Expected current version."
+          }
+        },
+        "required": [
+          "pageId",
+          "body"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.atlassian.com/software/confluence"
+}

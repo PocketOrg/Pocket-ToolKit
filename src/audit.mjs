@@ -1,10 +1,9 @@
 /**
  * Skill audit — the same rules the Pocket backend applies on submission.
  *
- * Deliberately duplicated rather than imported. This package is published for
- * `npx` use and open-sourced separately from the Pocket backend, so it cannot
- * depend on that codebase; and an author needs to be able to run the audit
- * offline before opening a pull request.
+ * Deliberately duplicated rather than imported. This toolkit is open-sourced
+ * separately from the Pocket backend, so it cannot depend on that codebase; and
+ * an author needs to run the audit offline before opening a pull request.
  *
  * Rule ids are identical to `Backend/src/algorithms/auditSkill.ts` on purpose:
  * the finding you see locally is the finding CI reports and the finding the

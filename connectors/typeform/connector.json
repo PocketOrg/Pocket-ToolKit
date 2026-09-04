@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "typeform",
+  "summary": "Create forms and read responses. Use for surveys and structured intake where the answers must be analysed.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "typeform-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_forms",
+      "description": "Lists forms in the account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_responses",
+      "description": "Reads responses for a form.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "formId": {
+            "type": "string",
+            "description": "Form id."
+          },
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          }
+        },
+        "required": [
+          "formId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_form",
+      "description": "Creates a form from a field definition.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Form title."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON array of field definitions."
+          }
+        },
+        "required": [
+          "title",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.typeform.com"
+}

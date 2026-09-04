@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "roles": [
+    "Procurement Specialist",
+    "Supply Chain Director",
+    "Senior Supply Planner",
+    "Quality Systems Specialist",
+    "Sustainable Sourcing Specialist"
+  ],
+  "license": "MIT"
+}

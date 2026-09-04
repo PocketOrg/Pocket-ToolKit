@@ -9,7 +9,7 @@
     "run": "npx",
     "args": [
       "-y",
-      "@linear/mcp-server"
+      "linear-mcp-server"
     ]
   },
   "auth": "oauth2",

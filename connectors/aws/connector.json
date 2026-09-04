@@ -9,7 +9,7 @@
     "run": "npx",
     "args": [
       "-y",
-      "@aws/mcp-server-aws"
+      "@modelcontextprotocol/server-aws-kb-retrieval"
     ]
   },
   "auth": "apiKey",

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "pinterest",
+  "summary": "Search Pinterest images and read board data. Use for visual research and reference gathering.",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "pinterest-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_pins",
+      "description": "Searches pins by keyword.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search terms."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum results."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_boards",
+      "description": "Lists the authorised account's boards.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.pinterest.com"
+}

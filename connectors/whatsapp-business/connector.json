@@ -1,0 +1,80 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "whatsapp-business",
+  "summary": "Send and read WhatsApp Business Cloud messages. Use for customer messaging where WhatsApp is the channel.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "whatsapp-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "send_message",
+      "description": "Sends a text message to a number.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient phone number in international format."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message text."
+          }
+        },
+        "required": [
+          "to",
+          "text"
+        ]
+      }
+    },
+    {
+      "name": "send_template",
+      "description": "Sends a pre-approved template message.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient phone number."
+          },
+          "template": {
+            "type": "string",
+            "description": "Approved template name."
+          },
+          "variables": {
+            "type": "string",
+            "description": "JSON array of template variables."
+          }
+        },
+        "required": [
+          "to",
+          "template"
+        ]
+      }
+    },
+    {
+      "name": "list_messages",
+      "description": "Lists recent messages for the number.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://business.whatsapp.com"
+}

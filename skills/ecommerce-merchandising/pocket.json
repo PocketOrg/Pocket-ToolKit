@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "roles": [
+    "E-commerce Manager",
+    "Head of E-commerce",
+    "Merchandising Specialist",
+    "Marketplace Specialist",
+    "Store Manager"
+  ],
+  "license": "MIT"
+}

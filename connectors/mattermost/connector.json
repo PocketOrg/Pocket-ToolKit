@@ -1,0 +1,81 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "mattermost",
+  "summary": "Read and post to Mattermost channels. Use for team chat on self-hosted infrastructure.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mattermost-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_channels",
+      "description": "Lists channels in a team.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "type": "string",
+            "description": "Team id."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_posts",
+      "description": "Reads recent posts in a channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string",
+            "description": "Channel id."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum posts."
+          }
+        },
+        "required": [
+          "channelId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_post",
+      "description": "Posts a message to a channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "type": "string",
+            "description": "Channel id."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message text."
+          }
+        },
+        "required": [
+          "channelId",
+          "message"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://mattermost.com"
+}

@@ -168,7 +168,7 @@ export async function initConnector(targetDir) {
   heading("Next");
   note(`1. Fill in each tool's inputSchema in ${name}/connector.json`);
   note(`2. Document behaviour and limits in ${name}/TOOLS.md`);
-  note(`3. Open a pull request against github.com/usepocket/connectors`);
+  note(`3. Open a pull request against github.com/PocketOrg/connectors`);
 
   return root;
 }

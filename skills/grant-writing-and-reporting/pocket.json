@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "Grant Strategy Manager",
+    "Fundraising Manager",
+    "Programs Director",
+    "Nonprofit Executive Director"
+  ],
+  "license": "MIT"
+}

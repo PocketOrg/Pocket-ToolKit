@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "roles": [
+    "Fractional CFO",
+    "Finance Director",
+    "Bookkeeping Assistant",
+    "Management Accountant",
+    "General Manager"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "zillow",
+  "summary": "Read Zillow property and market data. Use for property research and valuation comparison in supported regions.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "zillow-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_properties",
+      "description": "Searches properties by location and filters.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "City, state or postal code."
+          },
+          "maxPrice": {
+            "type": "number",
+            "description": "Maximum price."
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_property",
+      "description": "Reads one property's details and estimate.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "propertyId": {
+            "type": "string",
+            "description": "Property id or address."
+          }
+        },
+        "required": [
+          "propertyId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.zillow.com"
+}

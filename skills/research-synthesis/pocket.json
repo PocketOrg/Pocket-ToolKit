@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "roles": [
+    "Research Director",
+    "Research Assistant",
+    "Senior Research Analyst",
+    "Market Researcher"
+  ],
+  "license": "MIT"
+}

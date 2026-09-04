@@ -12,7 +12,7 @@
       "@auth0/auth0-mcp-server"
     ]
   },
-  "auth": "oauth",
+  "auth": "oauth2",
   "scopes": [
     "read"
   ],

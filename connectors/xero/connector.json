@@ -1,0 +1,95 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "xero",
+  "summary": "Read and update Xero contacts, invoices and accounts. Use for bookkeeping and reconciliation work against the live ledger.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@xeroapi/xero-mcp-server"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_contacts",
+      "description": "Lists contacts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_invoices",
+      "description": "Lists invoices, optionally by status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Invoice status filter."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_invoice",
+      "description": "Creates a draft invoice.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Contact id."
+          },
+          "lines": {
+            "type": "string",
+            "description": "JSON array of line items."
+          }
+        },
+        "required": [
+          "contactId",
+          "lines"
+        ]
+      }
+    },
+    {
+      "name": "list_accounts",
+      "description": "Lists the chart of accounts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_bank_transactions",
+      "description": "Lists bank transactions for reconciliation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.xero.com"
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "airbnb",
+  "summary": "Search Airbnb listings and read their details. Use for travel research and competitive pricing comparison.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@openbnb/mcp-server-airbnb"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "search_listings",
+      "description": "Searches listings by location and dates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "Place name."
+          },
+          "checkin": {
+            "type": "string",
+            "description": "ISO check-in date."
+          },
+          "checkout": {
+            "type": "string",
+            "description": "ISO check-out date."
+          },
+          "adults": {
+            "type": "number",
+            "description": "Number of adults."
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_listing",
+      "description": "Reads one listing's details.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "listingId": {
+            "type": "string",
+            "description": "Listing id."
+          }
+        },
+        "required": [
+          "listingId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.airbnb.com"
+}

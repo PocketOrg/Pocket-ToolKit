@@ -1,0 +1,112 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "odoo",
+  "summary": "Read and update Odoo records across sales, inventory and accounting modules. Use where Odoo is the ERP.",
+  "category": "Tools & Automation",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "odoo-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "search_records",
+      "description": "Searches records in a model with a domain filter.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Odoo model name, e.g. res.partner."
+          },
+          "domain": {
+            "type": "string",
+            "description": "JSON domain filter."
+          }
+        },
+        "required": [
+          "model"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_record",
+      "description": "Reads one record's fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Odoo model name."
+          },
+          "id": {
+            "type": "number",
+            "description": "Record id."
+          }
+        },
+        "required": [
+          "model"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_record",
+      "description": "Creates a record in a model.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Odoo model name."
+          },
+          "values": {
+            "type": "string",
+            "description": "JSON object of field values."
+          }
+        },
+        "required": [
+          "model",
+          "values"
+        ]
+      }
+    },
+    {
+      "name": "update_record",
+      "description": "Updates a record's fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Odoo model name."
+          },
+          "id": {
+            "type": "number",
+            "description": "Record id."
+          },
+          "values": {
+            "type": "string",
+            "description": "JSON object of field values."
+          }
+        },
+        "required": [
+          "model",
+          "values"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.odoo.com"
+}

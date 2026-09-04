@@ -11,8 +11,8 @@ Zero dependencies — nothing to install but this repository itself.
 | **`bin/`** | the `pocket` CLI |
 | **`src/`** | audit engine, scaffolders, catalogue generator |
 | **`schema/`** | JSON Schema for `pocket.json` and `connector.json` |
-| **`skills/`** | 28 audited seed skills |
-| **`connectors/`** | 26 seed connectors, each with its official coloured icon |
+| **`skills/`** | 129 audited seed skills, covering every role in the agent catalogue |
+| **`connectors/`** | 123 seed connectors, each with its official coloured icon |
 | **`build-icons.mjs`** | refreshes the icon data from Simple Icons |
 
 ## Install
@@ -186,7 +186,9 @@ human review follows.
 
 ### Skills
 
-[`skills/`](./skills) holds **28 audited skills**, every one passing at 100/100.
+[`skills/`](./skills) holds **100 audited skills**, every one passing at 100/100,
+spanning all eleven categories from Software Engineering and Security through to
+Data & Analytics, Sales & Marketing, Design & Creative and Healthcare & Science.
 Four are hand-written and worth reading as references for structure and tone:
 
 | Skill | Category | Weight |
@@ -205,14 +207,16 @@ under `adaptedFrom` — naming the original and what changed.
 
 ### Connectors
 
-[`connectors/`](./connectors) holds **26 connectors** for widely-used services —
-GitHub, GitLab, Sentry, Postgres, SQLite, Supabase, Docker, Kubernetes, AWS,
-Cloudflare, Vercel, Slack, Notion, Linear, Jira, Google Drive, Gmail, Google
-Calendar, Figma, Stripe, HubSpot, Snyk, 1Password, plus filesystem, fetch and web
-search.
+[`connectors/`](./connectors) holds **100 connectors** for widely-used services —
+source control, cloud platforms, databases, observability, CRM and support,
+research and AI tooling among them.
 
-Each declares real, published MCP packages in its `command`, so a connector is
-installable rather than illustrative.
+Every one declares a **real, published npm package** in its `command`. Each was
+checked against the public registry before being added, and candidates whose
+package did not resolve were dropped rather than shipped: a connector that cannot
+install is worse than one that is missing. Several services with strong MCP
+servers are absent for a related reason — Simple Icons carries no mark for them,
+and drawing a substitute would misrepresent the brand.
 
 Every connector directory contains:
 
@@ -260,7 +264,7 @@ the light-mode hex, which produces muddy greys that look nothing like the brand.
 Four brands needed the mirror treatment: Supabase's green reads at 2.0:1 on white,
 so light mode uses its deeper shade.
 
-The result: **10 of 26 carry a dark override, 16 use the brand colour in both**, and
+The result: **36 of 100 carry a dark override, 64 use the brand colour in both**, and
 every icon clears **3:1 against white and near-black**.
 
 Two mechanical details worth knowing if you edit one:

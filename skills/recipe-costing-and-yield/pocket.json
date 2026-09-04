@@ -1,0 +1,14 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "roles": [
+    "Head Baker",
+    "Pastry Chef",
+    "Baker",
+    "Junior Baker",
+    "Food Cost Analyst",
+    "Restaurant General Manager"
+  ],
+  "license": "MIT"
+}

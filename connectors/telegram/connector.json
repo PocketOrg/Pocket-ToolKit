@@ -1,0 +1,76 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "telegram",
+  "summary": "Read and send Telegram messages. Use for community and support channels hosted on Telegram.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mcp-telegram"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_dialogs",
+      "description": "Lists chats and channels the session can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "read_messages",
+      "description": "Reads recent messages from a chat.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "description": "Chat id or username."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum messages."
+          }
+        },
+        "required": [
+          "chatId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "send_message",
+      "description": "Sends a message to a chat.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string",
+            "description": "Chat id or username."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message text."
+          }
+        },
+        "required": [
+          "chatId",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://telegram.org"
+}

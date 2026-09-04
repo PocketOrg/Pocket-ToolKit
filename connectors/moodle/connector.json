@@ -1,0 +1,67 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "moodle",
+  "summary": "Read Moodle courses, activities and grades. Use for course administration where Moodle is the LMS.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "moodle-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_courses",
+      "description": "Lists courses.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_course_contents",
+      "description": "Reads a course's sections and activities.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "description": "Course id."
+          }
+        },
+        "required": [
+          "courseId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_grades",
+      "description": "Lists grade items for a course.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "description": "Course id."
+          }
+        },
+        "required": [
+          "courseId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://moodle.org"
+}

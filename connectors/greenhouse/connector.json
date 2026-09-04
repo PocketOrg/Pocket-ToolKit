@@ -1,0 +1,84 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "greenhouse",
+  "summary": "Read Greenhouse jobs, candidates and interview stages. Use for hiring pipeline work where Greenhouse is the ATS.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "greenhouse-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_jobs",
+      "description": "Lists open jobs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_candidates",
+      "description": "Lists candidates for a job.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Job id."
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_candidate",
+      "description": "Reads one candidate's application and stage.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "description": "Candidate id."
+          }
+        },
+        "required": [
+          "candidateId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_stages",
+      "description": "Lists interview stages for a job.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Job id."
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.greenhouse.io"
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Healthcare & Science",
+  "author": "pocket",
+  "roles": [
+    "Clinic Practice Manager",
+    "Patient Experience Manager",
+    "Care Administration Coordinator",
+    "Fitness Business Manager"
+  ],
+  "license": "MIT"
+}

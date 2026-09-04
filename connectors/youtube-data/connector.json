@@ -1,0 +1,57 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "youtube-data",
+  "summary": "Fetch YouTube video metadata and transcripts. Use for research and content analysis without watching the video.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@anaisbetts/mcp-youtube"
+    ]
+  },
+  "auth": "none",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "get_transcript",
+      "description": "Downloads a public video's transcript when captions exist.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Video URL."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_metadata",
+      "description": "Reads a public video's title, description and duration.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Video URL."
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.youtube.com"
+}

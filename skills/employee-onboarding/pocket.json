@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "HR Coordinator",
+    "Learning & Development Specialist",
+    "Administrative Assistant",
+    "People Operations Lead",
+    "Executive Assistant"
+  ],
+  "license": "MIT"
+}

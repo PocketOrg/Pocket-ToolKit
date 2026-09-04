@@ -12,7 +12,7 @@
       "@canva/cli"
     ]
   },
-  "auth": "oauth",
+  "auth": "oauth2",
   "scopes": [
     "read",
     "write"

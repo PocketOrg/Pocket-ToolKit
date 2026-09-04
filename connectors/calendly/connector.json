@@ -1,0 +1,69 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "calendly",
+  "summary": "Read Calendly event types and scheduled bookings. Use for scheduling coordination without exposing a full calendar.",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "calendly-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "list_event_types",
+      "description": "Lists bookable event types.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_scheduled_events",
+      "description": "Lists scheduled bookings in a period.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          },
+          "until": {
+            "type": "string",
+            "description": "ISO end date."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_invitee",
+      "description": "Reads an invitee's answers for a booking.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "Scheduled event id."
+          }
+        },
+        "required": [
+          "eventId"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://calendly.com"
+}

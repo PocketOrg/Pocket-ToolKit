@@ -1,0 +1,127 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "shopify-admin",
+  "summary": "Read and update Shopify products, orders, customers and inventory. Use for storefront and merchandising work against the live shop.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "shopify-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_products",
+      "description": "Lists products with variants.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_product",
+      "description": "Reads one product.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "Product id."
+          }
+        },
+        "required": [
+          "productId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "update_product",
+      "description": "Updates a product's fields.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "Product id."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of fields to change."
+          }
+        },
+        "required": [
+          "productId",
+          "fields"
+        ]
+      }
+    },
+    {
+      "name": "list_orders",
+      "description": "Lists orders, optionally by status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Order status filter."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_customers",
+      "description": "Lists customers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "adjust_inventory",
+      "description": "Adjusts an inventory level at a location.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "inventoryItemId": {
+            "type": "string",
+            "description": "Inventory item id."
+          },
+          "locationId": {
+            "type": "string",
+            "description": "Location id."
+          },
+          "delta": {
+            "type": "number",
+            "description": "Change in available quantity."
+          }
+        },
+        "required": [
+          "inventoryItemId",
+          "locationId"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.shopify.com"
+}

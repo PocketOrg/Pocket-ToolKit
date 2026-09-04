@@ -1,0 +1,104 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "google-maps-places",
+  "summary": "Geocode addresses, search places and compute routes. Use for local business research, service areas and travel planning.",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-google-maps"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read"
+  ],
+  "tools": [
+    {
+      "name": "geocode",
+      "description": "Converts an address to coordinates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Address to resolve."
+          }
+        },
+        "required": [
+          "address"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "search_places",
+      "description": "Searches places near a location.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search terms."
+          },
+          "location": {
+            "type": "string",
+            "description": "Latitude,longitude to search near."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_place_details",
+      "description": "Reads a place's details including hours and rating.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "placeId": {
+            "type": "string",
+            "description": "Place id."
+          }
+        },
+        "required": [
+          "placeId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_directions",
+      "description": "Computes a route between two points.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "description": "Start address or coordinates."
+          },
+          "destination": {
+            "type": "string",
+            "description": "End address or coordinates."
+          },
+          "mode": {
+            "type": "string",
+            "description": "Travel mode."
+          }
+        },
+        "required": [
+          "origin",
+          "destination"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://developers.google.com/maps"
+}

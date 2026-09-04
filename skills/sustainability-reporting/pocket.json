@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "roles": [
+    "Sustainability Director",
+    "Sustainable Sourcing Specialist",
+    "Agribusiness Strategy Manager",
+    "ESG Reporting Analyst"
+  ],
+  "license": "MIT"
+}

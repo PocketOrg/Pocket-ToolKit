@@ -1,0 +1,121 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "quickbooks",
+  "summary": "Read and update QuickBooks Online customers, invoices and reports. Use when an accounting agent needs the actual books rather than a description of them.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "quickbooks-mcp"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_customers",
+      "description": "Lists customers, optionally filtered.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Filter expression."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_invoice",
+      "description": "Reads one invoice by id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "string",
+            "description": "Invoice id."
+          }
+        },
+        "required": [
+          "invoiceId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_invoices",
+      "description": "Lists invoices in a date range.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          },
+          "until": {
+            "type": "string",
+            "description": "ISO end date."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_invoice",
+      "description": "Creates an invoice for a customer.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "description": "Customer id."
+          },
+          "lines": {
+            "type": "string",
+            "description": "JSON array of line items."
+          }
+        },
+        "required": [
+          "customerId",
+          "lines"
+        ]
+      }
+    },
+    {
+      "name": "run_report",
+      "description": "Runs a standard report such as profit and loss or balance sheet.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "report": {
+            "type": "string",
+            "description": "Report name."
+          },
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          },
+          "until": {
+            "type": "string",
+            "description": "ISO end date."
+          }
+        },
+        "required": [
+          "report"
+        ]
+      },
+      "readOnly": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://quickbooks.intuit.com"
+}

@@ -9,7 +9,7 @@
     "run": "npx",
     "args": [
       "-y",
-      "@modelcontextprotocol/server-fetch"
+      "mcp-server-fetch"
     ]
   },
   "auth": "none",

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "miro",
+  "summary": "Read and create Miro board items. Use for collaborative diagramming and workshop artefacts.",
+  "category": "Design & Creative",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "miro-mcp-server"
+    ]
+  },
+  "auth": "oauth2",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_boards",
+      "description": "Lists boards the token can reach.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_items",
+      "description": "Lists items on a board.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "boardId": {
+            "type": "string",
+            "description": "Board id."
+          }
+        },
+        "required": [
+          "boardId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "create_sticky",
+      "description": "Creates a sticky note on a board.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "boardId": {
+            "type": "string",
+            "description": "Board id."
+          },
+          "text": {
+            "type": "string",
+            "description": "Sticky note text."
+          }
+        },
+        "required": [
+          "boardId",
+          "text"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://miro.com"
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "square",
+  "summary": "Read Square payments, orders, catalogue and inventory. Use for retail and hospitality where Square is the till.",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "square-mcp-server"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_payments",
+      "description": "Lists payments in a period.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "since": {
+            "type": "string",
+            "description": "ISO start date."
+          },
+          "until": {
+            "type": "string",
+            "description": "ISO end date."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_orders",
+      "description": "Lists orders for a location.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "description": "Location id."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_catalog",
+      "description": "Lists catalogue items and variations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_inventory",
+      "description": "Reads inventory counts for catalogue items.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "itemIds": {
+            "type": "string",
+            "description": "Comma-separated catalogue item ids."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "update_catalog_item",
+      "description": "Updates a catalogue item's price or details.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "description": "Catalogue item id."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of fields to change."
+          }
+        },
+        "required": [
+          "itemId",
+          "fields"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://squareup.com"
+}

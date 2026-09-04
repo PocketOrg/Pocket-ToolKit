@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "Copy Editor",
+    "Communications Assistant",
+    "Senior Content Writer",
+    "Content Writer"
+  ],
+  "license": "MIT"
+}

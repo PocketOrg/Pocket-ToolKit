@@ -5,6 +5,7 @@ import { auditSkill } from "../audit.mjs";
 import { titleCase } from "../shared.mjs";
 import { SKILLS } from "./skills.data.mjs";
 import { CONNECTORS } from "./connectors.data.mjs";
+import { FALLBACK_ICON, ICONS, SVG_ATTRS } from "./icons.data.mjs";
 
 /**
  * Generates the seed catalogue from the definitions in `*.data.mjs`.
@@ -118,6 +119,56 @@ function renderConnector(connector) {
   return `${JSON.stringify(manifest, null, 2)}\n`;
 }
 
+/**
+ * Renders one connector's `icon.svg` — the service's official brand mark.
+ *
+ * The path comes from the brand's own logo; only the colour is changed.
+ * `fill="currentColor"` replaces the fixed brand colour, because a hardcoded one
+ * fails on one theme or the other: a dark mark vanishes on a dark card, a light
+ * one on a light card. Inheriting the text colour keeps a single file legible in
+ * both. There is no background rect, so the card's surface shows through.
+ *
+ * `role="img"` with a `<title>` makes it announce the service name rather than
+ * being skipped as decoration.
+ */
+function renderIcon(connector) {
+  const icon = ICONS[connector.slug] ?? FALLBACK_ICON;
+  const attrs = Object.entries({ xmlns: "http://www.w3.org/2000/svg", ...SVG_ATTRS })
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(" ");
+  const titleId = `${connector.slug}-icon-title`;
+  const cls = `${connector.slug}-mark`;
+
+  /*
+   * The dark swap is a `<style>` block inside the SVG rather than two files or a
+   * JS toggle. An embedded stylesheet applies when the SVG is inlined AND when it
+   * is loaded via <img> or background-image, which a separate stylesheet cannot
+   * reach — so one asset covers every way the frontend might render it.
+   *
+   * `fill` is set on the path via the class, not as a presentation attribute, so
+   * the media query can override it. A presentation attribute would win over the
+   * cascade and the dark colour would never apply.
+   */
+  const style = icon.darkHex
+    ? `
+  <style>
+    .${cls} { fill: ${icon.hex}; }
+    @media (prefers-color-scheme: dark) {
+      .${cls} { fill: ${icon.darkHex}; }
+    }
+  </style>`
+    : `
+  <style>
+    .${cls} { fill: ${icon.hex}; }
+  </style>`;
+
+  return `<svg ${attrs} role="img" aria-labelledby="${titleId}">
+  <title id="${titleId}">${icon.title}</title>${style}
+  <path class="${cls}" d="${icon.path}"/>
+</svg>
+`;
+}
+
 function renderConnectorTools(connector) {
   const sections = connector.tools
     .map((tool) => {
@@ -174,6 +225,32 @@ ${connector.tools.map((tool) => `- \`${tool.name}\` — ${tool.desc}`).join("\n"
 
 See [TOOLS.md](./TOOLS.md) for parameters.
 
+## Icon
+
+\`icon.svg\` is this connector's official mark **in full brand colour**, rendered on
+its marketplace card. It comes from [Simple Icons](https://simpleicons.org), which
+publishes brand SVGs and their official hex colours under CC0.
+
+The background is transparent, so the card's own surface shows through.
+
+Where a brand colour would not survive one of the two themes, the file carries a
+\`prefers-color-scheme: dark\` media query that swaps in that brand's dark-surface
+colour. GitHub's #181717, for instance, reads at 1.0:1 on a near-black card —
+invisible — so it inverts to white exactly as GitHub's own dark mode does. Every
+icon in the catalogue clears 3:1 against both a white and a near-black surface.
+
+If you replace it, keep these properties:
+
+- 24×24 \`viewBox\` — the native Simple Icons format
+- Fill applied via a \`<style>\` block, **not** a \`fill="…"\` attribute on the path.
+  A presentation attribute beats the cascade, so the dark override would never
+  apply.
+- No background \`<rect>\`, gradients, filters or \`<text>\`
+- A \`<title>\` naming the service, for screen readers
+
+Trademarks belong to their owners; a logo used to identify the service it
+represents is nominative use.
+
 ## Licence
 
 MIT
@@ -213,6 +290,9 @@ for (const skill of SKILLS) {
 
 let connectorsWritten = 0;
 const connectorSlugs = new Set();
+// Reported rather than thrown: a connector with the fallback plug icon still
+// works, but it should be visible that it needs a real one.
+const missingIcons = [];
 
 for (const connector of CONNECTORS) {
   if (connectorSlugs.has(connector.slug)) {
@@ -229,11 +309,17 @@ for (const connector of CONNECTORS) {
   await writeFile(path.join(dir, "connector.json"), renderConnector(connector), "utf8");
   await writeFile(path.join(dir, "README.md"), renderConnectorReadme(connector), "utf8");
   await writeFile(path.join(dir, "TOOLS.md"), renderConnectorTools(connector), "utf8");
+  await writeFile(path.join(dir, "icon.svg"), renderIcon(connector), "utf8");
+  if (!ICONS[connector.slug]) missingIcons.push(connector.slug);
   connectorsWritten += 1;
 }
 
 console.log(`\nskills      ${written} written${rejected ? `, ${rejected} REJECTED` : ""}`);
 console.log(`connectors  ${connectorsWritten} written`);
+console.log(
+  `icons       ${connectorsWritten - missingIcons.length} drawn` +
+    (missingIcons.length ? `, ${missingIcons.length} using the fallback: ${missingIcons.join(", ")}` : ""),
+);
 
 if (rejected) {
   console.error("\nSome skills failed the audit. Fix them before shipping the catalogue.");

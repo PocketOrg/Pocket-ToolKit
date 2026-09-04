@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "roles": [
+    "Chartered Accountant",
+    "Senior Accountant",
+    "Management Accountant",
+    "Junior Accountant"
+  ],
+  "license": "MIT"
+}

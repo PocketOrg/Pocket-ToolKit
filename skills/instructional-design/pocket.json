@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Research & Knowledge",
+  "author": "pocket",
+  "roles": [
+    "Learning & Development Specialist",
+    "Director of Learning",
+    "Teaching Assistant",
+    "Knowledge Manager",
+    "Curriculum Developer"
+  ],
+  "license": "MIT"
+}

@@ -145,8 +145,8 @@ export async function initSkill(targetDir) {
 
   heading("Next");
   note(`1. Write the instructions in ${name}/SKILL.md`);
-  note(`2. Check it:  npx @pocket/create audit ${name}`);
-  note(`3. Open a pull request against github.com/usepocket/skills`);
+  note(`2. Check it:  pocket audit ${name}`);
+  note(`3. Open a pull request against github.com/PocketOrg/skills`);
 
   return root;
 }
@@ -188,8 +188,8 @@ the agent hands back rather than guessing.
 
 ## Keep it tight
 
-Every token here is spent on every message once this skill loads. Move long
-reference material into \`reference/\` and mention it by filename — the agent
+Context here is not free: once loaded, this text costs tokens on each turn. Move
+long reference material into \`reference/\` and mention it by filename — the agent
 reads those only when it needs them.`}
 `;
 }
@@ -220,7 +220,7 @@ same file works in any runtime that supports the Agent Skills format.
 ## Checking it
 
 \`\`\`bash
-npx @pocket/create audit .
+pocket audit .
 \`\`\`
 
 This reports structural problems, prompt-injection risks and the skill's context

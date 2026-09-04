@@ -5,10 +5,9 @@ import readline from "node:readline/promises";
 /**
  * Minimal interactive prompt helpers.
  *
- * Written against `node:readline` rather than a prompt library on purpose: this
- * package is meant to be run with `npx` by people who have never installed
- * anything of ours, so a zero-dependency tool starts instantly and cannot break
- * because of a transitive update.
+ * Written against `node:readline` rather than a prompt library on purpose: a
+ * zero-dependency tool installs from a clone in a second, starts instantly, and
+ * cannot break because of a transitive update.
  */
 
 const ESC = "";

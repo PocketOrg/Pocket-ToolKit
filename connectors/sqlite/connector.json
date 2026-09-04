@@ -9,7 +9,7 @@
     "run": "npx",
     "args": [
       "-y",
-      "@modelcontextprotocol/server-sqlite"
+      "mcp-server-sqlite-npx"
     ]
   },
   "auth": "none",

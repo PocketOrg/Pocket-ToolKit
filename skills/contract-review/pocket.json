@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Security",
+  "author": "pocket",
+  "roles": [
+    "Contract Manager",
+    "General Counsel",
+    "Paralegal Assistant",
+    "Risk Manager",
+    "Procurement Specialist"
+  ],
+  "license": "MIT"
+}

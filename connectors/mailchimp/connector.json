@@ -1,0 +1,117 @@
+{
+  "$schema": "https://usepocket.net/schema/connector.json",
+  "name": "mailchimp",
+  "summary": "Read and manage Mailchimp audiences, campaigns and reports. Use for email marketing where Mailchimp holds the list.",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "transport": "stdio",
+  "command": {
+    "run": "npx",
+    "args": [
+      "-y",
+      "mailchimp-mcp"
+    ]
+  },
+  "auth": "apiKey",
+  "scopes": [
+    "read",
+    "write"
+  ],
+  "tools": [
+    {
+      "name": "list_audiences",
+      "description": "Lists audiences and their member counts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "list_campaigns",
+      "description": "Lists campaigns, optionally by status.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Campaign status filter."
+          }
+        },
+        "required": []
+      },
+      "readOnly": true
+    },
+    {
+      "name": "get_campaign_report",
+      "description": "Reads open, click and bounce figures for a campaign.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string",
+            "description": "Campaign id."
+          }
+        },
+        "required": [
+          "campaignId"
+        ]
+      },
+      "readOnly": true
+    },
+    {
+      "name": "add_member",
+      "description": "Adds or updates a member in an audience.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "audienceId": {
+            "type": "string",
+            "description": "Audience id."
+          },
+          "email": {
+            "type": "string",
+            "description": "Member email address."
+          },
+          "fields": {
+            "type": "string",
+            "description": "JSON object of merge fields."
+          }
+        },
+        "required": [
+          "audienceId",
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "create_campaign",
+      "description": "Creates a draft campaign. Does not send it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "audienceId": {
+            "type": "string",
+            "description": "Audience id."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line."
+          },
+          "html": {
+            "type": "string",
+            "description": "Campaign HTML."
+          }
+        },
+        "required": [
+          "audienceId",
+          "subject",
+          "html"
+        ]
+      }
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://mailchimp.com"
+}

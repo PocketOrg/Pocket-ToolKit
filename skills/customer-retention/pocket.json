@@ -1,0 +1,11 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "roles": [
+    "Customer Success Manager",
+    "Customer Support Specialist",
+    "Sales Manager"
+  ],
+  "license": "MIT"
+}

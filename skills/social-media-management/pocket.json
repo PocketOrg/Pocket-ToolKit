@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "roles": [
+    "Social Media Manager",
+    "Community Engagement Coordinator",
+    "Growth Marketing Lead",
+    "Content Writer"
+  ],
+  "license": "MIT"
+}

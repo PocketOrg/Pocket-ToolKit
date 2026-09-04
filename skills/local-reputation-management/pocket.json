@@ -1,0 +1,13 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Sales & Marketing",
+  "author": "pocket",
+  "roles": [
+    "Reputation & Reviews Specialist",
+    "Salon & Spa Manager",
+    "Local Business Assistant",
+    "Local Business Growth Manager",
+    "Multi-location Services Director"
+  ],
+  "license": "MIT"
+}

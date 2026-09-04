@@ -1,0 +1,14 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Data & Analytics",
+  "author": "pocket",
+  "roles": [
+    "Merchandising Specialist",
+    "Store Manager",
+    "Logistics Coordinator",
+    "Senior Supply Planner",
+    "Production Planning Assistant",
+    "Retail Assistant"
+  ],
+  "license": "MIT"
+}

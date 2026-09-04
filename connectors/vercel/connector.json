@@ -9,7 +9,7 @@
     "run": "npx",
     "args": [
       "-y",
-      "@vercel/mcp-server"
+      "vercel-mcp"
     ]
   },
   "auth": "apiKey",

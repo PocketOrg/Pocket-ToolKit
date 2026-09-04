@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "Senior Recruiter",
+    "Recruiter",
+    "HR Coordinator",
+    "People Operations Lead"
+  ],
+  "license": "MIT"
+}

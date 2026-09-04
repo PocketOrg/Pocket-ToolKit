@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Documents & Communication",
+  "author": "pocket",
+  "roles": [
+    "Payroll Specialist",
+    "HR Coordinator",
+    "Management Accountant",
+    "Junior Accountant"
+  ],
+  "license": "MIT"
+}

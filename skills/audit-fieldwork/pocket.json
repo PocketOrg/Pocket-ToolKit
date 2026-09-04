@@ -1,0 +1,12 @@
+{
+  "$schema": "https://usepocket.net/schema/skill.json",
+  "category": "Security",
+  "author": "pocket",
+  "roles": [
+    "Audit Manager",
+    "Chartered Accountant",
+    "Risk Manager",
+    "Senior Accountant"
+  ],
+  "license": "MIT"
+}
